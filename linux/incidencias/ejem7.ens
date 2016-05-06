@@ -1,0 +1,33 @@
+move #pila,.sp
+move #2,.r9
+call /main
+halt
+main:
+move .sp,.ix
+add .sp,.r9
+move .a,.sp
+WRSTR /C_00000
+move #0,/auxiliar
+E_00000:
+cmp /auxiliar,#0
+bz $2
+bp /E_00001
+move #0,#0[.ix]
+br /E_00002
+E_00001:
+move #1,#0[.ix]
+E_00002:
+cmp #0[.ix],#0
+bz /E_00003
+move /auxiliar,.r8
+WRINT .r8
+sub /auxiliar,#1
+move .a,#1[.ix]
+move #1[.ix],/auxiliar
+br /E_00000
+E_00003:
+move .ix,.sp
+ret
+auxiliar : res 1
+C_00000 : data 72,111,108,97,32,10,0
+pila:

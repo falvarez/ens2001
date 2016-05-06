@@ -1,0 +1,279 @@
+;------------------------------------------------------
+;           COMIENZO DEL PROGRAMA ENSAMBLADOR          
+;                                                      
+; Practica de Compiladores, curso 2001/2002            
+; Compilador de un subconjunto del lenguaje C++        
+; Grupo 12                                             
+;                                                      
+; Condiciones de funcionamiento:                       
+; - El PC debe empezar en la direccion 0               
+; - La pila debe crecer en sentido descendente         
+;                                                      
+; El siguiente fragmento de codigo:                    
+; - Inicializa el SP                                   
+; - Inicializa el puntero a la zona de datos estaticos 
+; - Llama a la rutina principal                        
+; - Genera el codigo de la funcion strlen              
+;------------------------------------------------------
+
+      move #65535, .sp
+      move #VG, .iy
+      br /INICIO
+
+;------------------------------------------------------
+;                        FUNCION                       
+;                                                      
+; NOMBRE: strlen
+;------------------------------------------------------
+
+STRLEN: nop
+      push .ix
+      push .sr
+      add .sp, #6
+      move .a, .ix
+      move [.ix], .r1
+      move #0, .r2
+SIGUE: cmp [.r1], #0
+      bz $GUARDA
+      inc .r2
+      inc .r1
+      br $SIGUE
+GUARDA: move .r2, #-1[.ix]
+      SALIR: pop .sr
+      pop .ix
+      ret 
+
+;------------------------------------------------------
+;                         METODO                       
+;                                                      
+; NOMBRE: Obtener_Peso
+;------------------------------------------------------
+
+ETQ1: nop
+      push .ix
+      push .sr
+      add .sp, #6
+      move .a, .ix
+      ;------>Comienzo de un return
+      ;[ASIG INTERNA] 1tmp := peso
+      add #-2[.ix], #1
+      move .a, .r3
+      move [.r3], #0[.ix]
+      ;DEVOLVER (1tmp)
+      move #0[.ix], #-1[.ix]
+      br /SALIR
+      ;------>return: fin de la sentencia
+      br /SALIR
+
+;------------------------------------------------------
+;                         METODO                       
+;                                                      
+; NOMBRE: Poner_Edad
+;------------------------------------------------------
+
+ETQ2: nop
+      push .ix
+      push .sr
+      add .sp, #6
+      move .a, .ix
+      ;------>Comienzo de una asignacion
+      ;[ASIG INTERNA] 2tmp := a
+      move #0[.ix], #1[.ix]
+      ;[ASIGNACION] peso := 2tmp
+      add #-2[.ix], #1
+      move .a, .r4
+      move #1[.ix], [.r4]
+      ;------>asignacion: fin de la sentencia
+      br /SALIR
+
+;------------------------------------------------------
+;                         METODO                       
+;                                                      
+; NOMBRE: Poner_Peso
+;------------------------------------------------------
+
+ETQ3: nop
+      push .ix
+      push .sr
+      add .sp, #6
+      move .a, .ix
+      ;------>Comienzo de una asignacion
+      ;[ASIG INTERNA] 3tmp := a
+      move #0[.ix], #1[.ix]
+      ;[ASIGNACION] edad := 3tmp
+      add #-2[.ix], #0
+      move .a, .r3
+      move #1[.ix], [.r3]
+      ;------>asignacion: fin de la sentencia
+      br /SALIR
+
+;------------------------------------------------------
+;                        FUNCION                       
+;                                                      
+; NOMBRE: main
+;------------------------------------------------------
+
+MAIN: nop
+      push .ix
+      push .sr
+      add .sp, #6
+      move .a, .ix
+      ;------>Comienzo de un cout
+      ;[VALOR] 4tmp:= "Introduce la Edad: "
+      move #ETQ4, #3[.ix]
+      ;[ASIG INTERNA] 5tmp := 4tmp
+      move #3[.ix], #4[.ix]
+      ;SALIDA (5tmp)
+      move #4[.ix], .r1
+      wrstr [.r1]
+      ;[VALOR] 6tmp:= endl
+      move #FDL, #5[.ix]
+      ;[ASIG INTERNA] 7tmp := 6tmp
+      move #5[.ix], #6[.ix]
+      ;SALIDA (7tmp)
+      move #6[.ix], .r1
+      wrstr [.r1]
+      ;------>cout: fin de la sentencia
+      ;------>Comienzo de un cin
+      ;ENTRADA (a)
+      inint #0[.ix]
+      ;------>cin: fin de la sentencia
+      ;------>Comienzo de una llamada
+      ;Se prepara el RA para llamar a Poner_Edad
+      ;[CREAR RA] .sp:=.sp-4
+      sub .sp, #4
+      move .a, .sp
+      ;[ASIG INTERNA] 8tmp := a
+      move #0[.ix], #7[.ix]
+      ;PARAMETRO (8tmp)
+      add .sp, #3
+      move #7[.ix], [.a]
+      ;[LLAMADA] 9tmp:=Poner_Edad con 1 args (etiqueta: ETQ2)
+      add .ix, #1
+      move .a, .r1
+      add .sp, #1
+      move .r1, [.a]
+      call /ETQ2
+      ;Se recoge el valor devuelto
+      add .sp, #2
+      move [.a], #8[.ix]
+      ;Se deshace el RA del llamado
+      add .sp, #4
+      move .a, .sp
+      ;------>llamada: fin de la sentencia
+      ;------>Comienzo de un cout
+      ;[VALOR] 10tmp:= "Introduce el Peso: "
+      move #ETQ5, #9[.ix]
+      ;[ASIG INTERNA] 11tmp := 10tmp
+      move #9[.ix], #10[.ix]
+      ;SALIDA (11tmp)
+      move #10[.ix], .r1
+      wrstr [.r1]
+      ;[VALOR] 12tmp:= endl
+      move #FDL, #11[.ix]
+      ;[ASIG INTERNA] 13tmp := 12tmp
+      move #11[.ix], #12[.ix]
+      ;SALIDA (13tmp)
+      move #12[.ix], .r1
+      wrstr [.r1]
+      ;------>cout: fin de la sentencia
+      ;------>Comienzo de un cin
+      ;ENTRADA (a)
+      inint #0[.ix]
+      ;------>cin: fin de la sentencia
+      ;------>Comienzo de una llamada
+      ;Se prepara el RA para llamar a Poner_Peso
+      ;[CREAR RA] .sp:=.sp-4
+      sub .sp, #4
+      move .a, .sp
+      ;[ASIG INTERNA] 14tmp := a
+      move #0[.ix], #13[.ix]
+      ;PARAMETRO (14tmp)
+      add .sp, #3
+      move #13[.ix], [.a]
+      ;[LLAMADA] 15tmp:=Poner_Peso con 1 args (etiqueta: ETQ3)
+      add .ix, #1
+      move .a, .r1
+      add .sp, #1
+      move .r1, [.a]
+      call /ETQ3
+      ;Se recoge el valor devuelto
+      add .sp, #2
+      move [.a], #14[.ix]
+      ;Se deshace el RA del llamado
+      add .sp, #4
+      move .a, .sp
+      ;------>llamada: fin de la sentencia
+      ;------>Comienzo de un cout
+      ;[VALOR] 16tmp:= "El peso de Pepe es: "
+      move #ETQ6, #15[.ix]
+      ;[ASIG INTERNA] 17tmp := 16tmp
+      move #15[.ix], #16[.ix]
+      ;SALIDA (17tmp)
+      move #16[.ix], .r1
+      wrstr [.r1]
+      ;------>cout: fin de la sentencia
+      ;------>Comienzo de un cout
+      ;Se prepara el RA para llamar a Obtener_Peso
+      ;[CREAR RA] .sp:=.sp-3
+      sub .sp, #3
+      move .a, .sp
+      ;[LLAMADA] 18tmp:=Obtener_Peso con 0 args (etiqueta: ETQ1)
+      add .ix, #1
+      move .a, .r1
+      add .sp, #1
+      move .r1, [.a]
+      call /ETQ1
+      ;Se recoge el valor devuelto
+      add .sp, #2
+      move [.a], #17[.ix]
+      ;Se deshace el RA del llamado
+      add .sp, #3
+      move .a, .sp
+      ;[ASIG INTERNA] 19tmp := 18tmp
+      move #17[.ix], #18[.ix]
+      ;SALIDA (19tmp)
+      wrint #18[.ix]
+      ;[VALOR] 20tmp:= endl
+      move #FDL, #19[.ix]
+      ;[ASIG INTERNA] 21tmp := 20tmp
+      move #19[.ix], #20[.ix]
+      ;SALIDA (21tmp)
+      move #20[.ix], .r1
+      wrstr [.r1]
+      ;------>cout: fin de la sentencia
+      ;------>Comienzo de un return
+      ;DEVOLVER (nada)  [retorno main]
+      br /SALIR
+      ;------>return: fin de la sentencia
+      br /SALIR
+;------------------------------------------------------
+;           RUTINA PRINCIPAL DEL PROGRAMA              
+;                                                      
+; - Prepara el registro de activación de main          
+; - Llama a main                                       
+; - Para la ejecución                                  
+;------------------------------------------------------
+
+INICIO: nop
+      ;Se prepara el RA para llamar a main
+      ;[CREAR RA] .sp:=.sp-23
+      sub .sp, #23
+      move .a, .sp
+      call /MAIN
+      halt
+
+;------------------------------------------------------
+;        ZONA DE MEMORIA PARA DATOS ESTATICOS          
+;                                                      
+; - Variables globales                                 
+; - Constantes de tipo cadena                          
+;------------------------------------------------------
+
+VG:   res 0
+FDL: data "\n"
+ETQ4: data "Introduce la Edad: "
+ETQ5: data "Introduce el Peso: "
+ETQ6: data "El peso de Pepe es: "
+
+end

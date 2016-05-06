@@ -1,0 +1,300 @@
+;------------------------------------------------------
+;           COMIENZO DEL PROGRAMA ENSAMBLADOR          
+;                                                      
+; Practica de Compiladores, curso 2001/2002            
+; Compilador de un subconjunto del lenguaje C++        
+; Grupo 12                                             
+;                                                      
+; Condiciones de funcionamiento:                       
+; - El PC debe empezar en la direccion 0               
+; - La pila debe crecer en sentido descendente         
+;                                                      
+; El siguiente fragmento de codigo:                    
+; - Inicializa el SP                                   
+; - Inicializa el puntero a la zona de datos estaticos 
+; - Llama a la rutina principal                        
+; - Genera el codigo de la funcion strlen              
+;------------------------------------------------------
+
+      move #65535, .sp
+      move #VG, .iy
+      br /INICIO
+
+;------------------------------------------------------
+;                        FUNCION                       
+;                                                      
+; NOMBRE: strlen
+;------------------------------------------------------
+
+STRLEN: nop
+      push .ix
+      push .sr
+      add .sp, #6
+      move .a, .ix
+      move [.ix], .r1
+      move #0, .r2
+SIGUE: cmp [.r1], #0
+      bz $GUARDA
+      inc .r2
+      inc .r1
+      br $SIGUE
+GUARDA: move .r2, #-1[.ix]
+      SALIR: pop .sr
+      pop .ix
+      ret 
+
+;------------------------------------------------------
+;                         METODO                       
+;                                                      
+; NOMBRE: Imprime_edad
+;------------------------------------------------------
+
+ETQ1: nop
+      push .ix
+      push .sr
+      add .sp, #6
+      move .a, .ix
+      ;------>Comienzo de un cout
+      ;[VALOR] 1tmp:= "La edad es "
+      move #ETQ2, #0[.ix]
+      ;[ASIG INTERNA] 2tmp := 1tmp
+      move #0[.ix], #1[.ix]
+      ;SALIDA (2tmp)
+      move #1[.ix], .r1
+      wrstr [.r1]
+      ;[ASIG INTERNA] 3tmp := edad
+      add #-2[.ix], #0
+      move .a, .r3
+      move [.r3], #2[.ix]
+      ;SALIDA (3tmp)
+      wrint #2[.ix]
+      ;[VALOR] 4tmp:= endl
+      move #FDL, #3[.ix]
+      ;[ASIG INTERNA] 5tmp := 4tmp
+      move #3[.ix], #4[.ix]
+      ;SALIDA (5tmp)
+      move #4[.ix], .r1
+      wrstr [.r1]
+      ;------>cout: fin de la sentencia
+      br /SALIR
+
+;------------------------------------------------------
+;                         METODO                       
+;                                                      
+; NOMBRE: Imprime_nombre
+;------------------------------------------------------
+
+ETQ3: nop
+      push .ix
+      push .sr
+      add .sp, #6
+      move .a, .ix
+      ;------>Comienzo de un cout
+      ;[VALOR] 6tmp:= "El nombre es "
+      move #ETQ4, #0[.ix]
+      ;[ASIG INTERNA] 7tmp := 6tmp
+      move #0[.ix], #1[.ix]
+      ;SALIDA (7tmp)
+      move #1[.ix], .r1
+      wrstr [.r1]
+      ;[ASIG INTERNA] 8tmp := nombre
+      add #-2[.ix], #3
+      move .a, .r4
+      move [.r4], #2[.ix]
+      ;SALIDA (8tmp)
+      move #2[.ix], .r1
+      wrstr [.r1]
+      ;[VALOR] 9tmp:= endl
+      move #FDL, #3[.ix]
+      ;[ASIG INTERNA] 10tmp := 9tmp
+      move #3[.ix], #4[.ix]
+      ;SALIDA (10tmp)
+      move #4[.ix], .r1
+      wrstr [.r1]
+      ;------>cout: fin de la sentencia
+      br /SALIR
+
+;------------------------------------------------------
+;                         METODO                       
+;                                                      
+; NOMBRE: Fija_edad
+;------------------------------------------------------
+
+ETQ5: nop
+      push .ix
+      push .sr
+      add .sp, #6
+      move .a, .ix
+      ;------>Comienzo de una asignacion
+      ;[ASIG INTERNA] 11tmp := e
+      move #0[.ix], #1[.ix]
+      ;[ASIGNACION] edad := 11tmp
+      add #-2[.ix], #0
+      move .a, .r3
+      move #1[.ix], [.r3]
+      ;------>asignacion: fin de la sentencia
+      br /SALIR
+
+;------------------------------------------------------
+;                         METODO                       
+;                                                      
+; NOMBRE: Fija_nombre
+;------------------------------------------------------
+
+ETQ6: nop
+      push .ix
+      push .sr
+      add .sp, #6
+      move .a, .ix
+      ;------>Comienzo de una asignacion
+      ;[ASIG INTERNA] 12tmp := n
+      move #0[.ix], #1[.ix]
+      ;[ASIGNACION] nombre := 12tmp
+      add #-2[.ix], #3
+      move .a, .r4
+      move #1[.ix], [.r4]
+      ;------>asignacion: fin de la sentencia
+      br /SALIR
+
+;------------------------------------------------------
+;                        FUNCION                       
+;                                                      
+; NOMBRE: main
+;------------------------------------------------------
+
+MAIN: nop
+      push .ix
+      push .sr
+      add .sp, #6
+      move .a, .ix
+      ;------>Comienzo de una asignacion
+      ;[VALOR] 13tmp:= 24
+      move #24, #8[.ix]
+      ;[ASIG INTERNA] 14tmp := 13tmp
+      move #8[.ix], #9[.ix]
+      ;[ASIGNACION] edad := 14tmp
+      move #9[.ix], #4[.ix]
+      ;------>asignacion: fin de la sentencia
+      ;------>Comienzo de una llamada
+      ;Se prepara el RA para llamar a Fija_edad
+      ;[CREAR RA] .sp:=.sp-4
+      sub .sp, #4
+      move .a, .sp
+      ;[VALOR] 15tmp:= 23
+      move #23, #10[.ix]
+      ;[ASIG INTERNA] 16tmp := 15tmp
+      move #10[.ix], #11[.ix]
+      ;PARAMETRO (16tmp)
+      add .sp, #3
+      move #11[.ix], [.a]
+      ;[LLAMADA] 17tmp:=Fija_edad con 1 args (etiqueta: ETQ5)
+      add .ix, #0
+      move .a, .r1
+      add .sp, #1
+      move .r1, [.a]
+      call /ETQ5
+      ;Se recoge el valor devuelto
+      add .sp, #2
+      move [.a], #12[.ix]
+      ;Se deshace el RA del llamado
+      add .sp, #4
+      move .a, .sp
+      ;------>llamada: fin de la sentencia
+      ;------>Comienzo de una llamada
+      ;Se prepara el RA para llamar a Fija_nombre
+      ;[CREAR RA] .sp:=.sp-4
+      sub .sp, #4
+      move .a, .sp
+      ;[VALOR] 18tmp:= "ALGUIEN"
+      move #ETQ7, #13[.ix]
+      ;[ASIG INTERNA] 19tmp := 18tmp
+      move #13[.ix], #14[.ix]
+      ;PARAMETRO (19tmp)
+      add .sp, #3
+      move #14[.ix], [.a]
+      ;[LLAMADA] 20tmp:=Fija_nombre con 1 args (etiqueta: ETQ6)
+      add .ix, #0
+      move .a, .r1
+      add .sp, #1
+      move .r1, [.a]
+      call /ETQ6
+      ;Se recoge el valor devuelto
+      add .sp, #2
+      move [.a], #15[.ix]
+      ;Se deshace el RA del llamado
+      add .sp, #4
+      move .a, .sp
+      ;------>llamada: fin de la sentencia
+      ;------>Comienzo de una llamada
+      ;Se prepara el RA para llamar a Imprime_nombre
+      ;[CREAR RA] .sp:=.sp-7
+      sub .sp, #7
+      move .a, .sp
+      ;[LLAMADA] 21tmp:=Imprime_nombre con 0 args (etiqueta: ETQ3)
+      add .ix, #0
+      move .a, .r1
+      add .sp, #1
+      move .r1, [.a]
+      call /ETQ3
+      ;Se recoge el valor devuelto
+      add .sp, #2
+      move [.a], #16[.ix]
+      ;Se deshace el RA del llamado
+      add .sp, #7
+      move .a, .sp
+      ;------>llamada: fin de la sentencia
+      ;------>Comienzo de una asignacion
+      ;[ASIG INTERNA] 22tmp := edad
+      move #0[.ix], #17[.ix]
+      ;[ASIGNACION] edad := 22tmp
+      move #17[.ix], #0[.iy]
+      ;------>asignacion: fin de la sentencia
+      ;------>Comienzo de una llamada
+      ;Se prepara el RA para llamar a Imprime_edad
+      ;[CREAR RA] .sp:=.sp-7
+      sub .sp, #7
+      move .a, .sp
+      ;[LLAMADA] 23tmp:=Imprime_edad con 0 args (etiqueta: ETQ1)
+      add .iy, #0
+      move .a, .r1
+      add .sp, #1
+      move .r1, [.a]
+      call /ETQ1
+      ;Se recoge el valor devuelto
+      add .sp, #2
+      move [.a], #18[.ix]
+      ;Se deshace el RA del llamado
+      add .sp, #7
+      move .a, .sp
+      ;------>llamada: fin de la sentencia
+      br /SALIR
+;------------------------------------------------------
+;           RUTINA PRINCIPAL DEL PROGRAMA              
+;                                                      
+; - Prepara el registro de activación de main          
+; - Llama a main                                       
+; - Para la ejecución                                  
+;------------------------------------------------------
+
+INICIO: nop
+      ;Se prepara el RA para llamar a main
+      ;[CREAR RA] .sp:=.sp-21
+      sub .sp, #21
+      move .a, .sp
+      call /MAIN
+      halt
+
+;------------------------------------------------------
+;        ZONA DE MEMORIA PARA DATOS ESTATICOS          
+;                                                      
+; - Variables globales                                 
+; - Constantes de tipo cadena                          
+;------------------------------------------------------
+
+VG:   res 4
+FDL: data "\n"
+ETQ2: data "La edad es "
+ETQ4: data "El nombre es "
+ETQ7: data "ALGUIEN"
+
+end

@@ -1,0 +1,269 @@
+move #pila,.sp
+move #18,.r9
+call /main
+halt
+imprime:
+move .sp,.ix
+add .sp,.r9
+move .a,.sp
+WRSTR /C_00000
+WRSTR /C_00001
+move #-4[.ix],.r8
+WRINT .r8
+move #-5[.ix],.r8
+WRINT .r8
+move .ix,.sp
+ret
+Multiplicar:
+move .sp,.ix
+add .sp,.r9
+move .a,.sp
+move #0,#1[.ix]
+move #0,#0[.ix]
+E_00000:
+cmp #0[.ix],#-5[.ix]
+bn /E_00001
+move #0,#2[.ix]
+br /E_00002
+E_00001:
+move #1,#2[.ix]
+E_00002:
+cmp #2[.ix],#0
+bz /E_00003
+add #1[.ix],#-4[.ix]
+move .a,#3[.ix]
+move #3[.ix],#1[.ix]
+add #0[.ix],#1
+move .a,#4[.ix]
+move #4[.ix],#0[.ix]
+br /E_00000
+E_00003:
+move #0,.r0
+move .ix,.sp
+ret
+FWhile:
+move .sp,.ix
+add .sp,.r9
+move .a,.sp
+move #1,#0[.ix]
+move #0,#1[.ix]
+E_00004:
+cmp #1[.ix],#-4[.ix]
+bn /E_00005
+move #0,#2[.ix]
+br /E_00006
+E_00005:
+move #1,#2[.ix]
+E_00006:
+cmp #2[.ix],#0
+bz /E_00007
+add #1[.ix],#1
+move .a,#3[.ix]
+move #3[.ix],#1[.ix]
+move #0[.ix],.r5
+push .r5
+move #1[.ix],.r5
+push .r5
+move #5,.r9
+push .sr
+push .ix
+call /Multiplicar
+pop .ix
+pop .sr
+sub .sp,#2
+move .a,.sp
+move .r0,#4[.ix]
+move #4[.ix],#0[.ix]
+br /E_00004
+E_00007:
+move #0,.r0
+move .ix,.sp
+ret
+Fecha_ponFecha:
+move .sp,.ix
+add .sp,.r9
+move .a,.sp
+move #-4[.ix],#0[.iy]
+move #-5[.ix],#1[.iy]
+move #-6[.ix],#2[.iy]
+move .ix,.sp
+ret
+Fecha_daDia:
+move .sp,.ix
+add .sp,.r9
+move .a,.sp
+move #0[.iy],#0[.ix]
+move #0,.r0
+move .ix,.sp
+ret
+Fecha_daMes:
+move .sp,.ix
+add .sp,.r9
+move .a,.sp
+move #1[.iy],#0[.ix]
+move #0,.r0
+move .ix,.sp
+ret
+Fecha_daAnno:
+move .sp,.ix
+add .sp,.r9
+move .a,.sp
+move #2[.iy],#0[.ix]
+move #0,.r0
+move .ix,.sp
+ret
+Fecha_imprime:
+move .sp,.ix
+add .sp,.r9
+move .a,.sp
+move #0[.iy],#0[.ix]
+move #0[.ix],.r8
+WRINT .r8
+WRSTR /C_00002
+move #1[.iy],#1[.ix]
+move #1[.ix],.r8
+WRINT .r8
+WRSTR /C_00003
+move #2[.iy],#2[.ix]
+move #2[.ix],.r8
+WRINT .r8
+move .ix,.sp
+ret
+demo:
+move .sp,.ix
+add .sp,.r9
+move .a,.sp
+WRSTR /C_00004
+move #1,.r4
+add .ix,#2
+add .r4,.a
+move .a ,.r8
+inint [.r8]
+move #2,.r4
+add .ix,#2
+add .r4,.a
+move .a ,.r8
+inint [.r8]
+move #3,.r4
+add .ix,#2
+add .r4,.a
+move .a ,.r8
+inint [.r8]
+WRSTR /C_00005
+move #4,#1[.ix]
+WRSTR /C_00006
+move .ix,.sp
+ret
+main:
+move .sp,.ix
+add .sp,.r9
+move .a,.sp
+move #80,#7[.ix]
+move #4,#8[.ix]
+push .iy
+add #9,.ix
+move .a,.iy
+push #11
+push #2
+push #1969
+move #0,.r9
+push .sr
+push .ix
+call /Fecha_ponFecha
+pop .ix
+pop .sr
+sub .sp,#3
+move .a,.sp
+pop .iy
+push .iy
+add #9,.ix
+move .a,.iy
+move #3,.r9
+push .sr
+push .ix
+call /Fecha_imprime
+pop .ix
+pop .sr
+move .a,.sp
+pop .iy
+move #8[.ix],.r5
+push .r5
+move #5,.r9
+push .sr
+push .ix
+call /FWhile
+pop .ix
+pop .sr
+sub .sp,#1
+move .a,.sp
+move .r0,#12[.ix]
+move #12[.ix],#5[.ix]
+move #7[.ix],.r5
+push .r5
+move #8[.ix],.r5
+push .r5
+move #0,.r9
+push .sr
+push .ix
+call /imprime
+pop .ix
+pop .sr
+sub .sp,#2
+move .a,.sp
+move #0,#5[.ix]
+E_00008:
+cmp #5[.ix],#5
+bn /E_00009
+move #0,#13[.ix]
+br /E_00010
+E_00009:
+move #1,#13[.ix]
+E_00010:
+cmp #13[.ix],#0
+bz /E_00011
+move #5[.ix],.r4
+add .ix,#0
+add .r4,.a
+move .a,.r3
+move #5[.ix],.a
+move .a,[.r3]
+add #5[.ix],#1
+move .a,#14[.ix]
+move #14[.ix],#5[.ix]
+br /E_00008
+E_00011:
+sub #5[.ix],#1
+move .a,#15[.ix]
+move #15[.ix],#5[.ix]
+add #2,#3
+move .a,#16[.ix]
+move #16[.ix],.r5
+push .r5
+move #2,.r4
+add .ix,#0
+add .r4,.a
+move .a,.r3
+move [.r3],.a
+move .a,#17[.ix]
+move #17[.ix],.r5
+push .r5
+move #5,.r9
+push .sr
+push .ix
+call /Multiplicar
+pop .ix
+pop .sr
+sub .sp,#2
+move .a,.sp
+WRSTR /C_00007
+move .ix,.sp
+ret
+C_00000 : data 73,109,112,114,105,109,105,101,110,100,111,32,110,117,109,101,114,111,115,32,46,46,46,0
+C_00001 : data 10,0
+C_00002 : data 45,0
+C_00003 : data 45,0
+C_00004 : data 69,115,99,114,105,98,97,32,116,114,101,115,32,110,-6,109,101,114,111,115,58,32,0
+C_00005 : data 72,79,76,65,0
+C_00006 : data 10,0
+C_00007 : data 84,101,114,109,105,110,97,32,0
+pila:

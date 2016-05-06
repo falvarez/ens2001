@@ -1,0 +1,27 @@
+	  org 0
+	  move .sp,.ix
+	  br /main
+main:	  move #8,#200[.ix]
+	  move #e1,.r0
+iniciocadenae1: 	  cmp [.r0],#0 
+	  move [.r0],#0[.ix]
+	  bz /fincadenae1 
+	  add .ix,#1
+	  move .a,.ix
+	  inc .r0 
+	  br /iniciocadenae1
+fincadenae1:	  move .sp,.ix
+	  cmp  #200[.ix],#16
+	  bz /nomenor
+	  bp /nomenor
+	  move #1,#202[.ix]
+	  br  /finmenor
+nomenor:	  move #0,#202[.ix]
+finmenor:	  move #202[.ix],#200[.ix]
+	  wrint #200[.ix]
+	  wrstr #0[.ix]
+	  inint #200[.ix]
+	  wrint #200[.ix]
+	  halt
+e1:	  data "pepe"
+	  end

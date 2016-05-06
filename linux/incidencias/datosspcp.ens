@@ -1,0 +1,16 @@
+	  org 0
+	  move .sp,.ix
+	  br /main
+main:	  move #8,#0[.ix]
+	  cmp  #0[.ix],#16
+	  bz /nomenor
+	  bp /nomenor
+	  move #1,#2[.ix]
+	  br  /finmenor
+nomenor:	  move #0,#2[.ix]
+finmenor:	  move #2[.ix],#0[.ix]
+	  wrint #0[.ix]
+	  inint #0[.ix]
+	  wrint #0[.ix]
+	  halt
+	  end

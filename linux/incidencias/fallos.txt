@@ -1,0 +1,13 @@
+Fallan los ejemplos 5 y 13 al cargarlos desde la línea de comandos.
+
+Me preguntan también, con respecto a la pseudoinstrucción data para cadenas, si en el interior se admiten caracteres especiales (como el salto de línea):
+
+data "hola \n hola"
+
+Una solución podría ser:
+
+data "hola", 13, "hola" 	
+
+pero parece que esto no funciona bien, porque se mete un \0 tras el primer hola.
+
+f980401@zipi.fi.upm.es

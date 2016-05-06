@@ -1,0 +1,24 @@
+Referencia Rapida de Comandos Modo Consola
+----------------------------------------------------------------------------
+a               Activa/Desactiva Modo Paso A Paso
+b               Activa/Desactiva Puntos de Ruptura
+b dir           Pone/Quita un Punto de Ruptura en la direccion dir
+c fichero       Carga y Ensambla el fichero
+d dir num       Desensambla num instrucciones a partir de dir
+e               Ejecuta el codigo
+g		Activa/Desactiva comprobacion si PC invade la zona de pila
+h               Visualiza la ayuda
+i		Activa/Desactiva comprobacion si SP invade la zona de codigo
+k               Modifica el Funcionamiento de la pila (Creciente/Decreciente)
+l fichero       Carga una Imagen de Memoria desde fichero
+m dir [valor]   Visualiza/Modifica el contenido de la Direccion dir
+n base          Base de Representacion Numerica (10 o 16)
+o		Configuracion del Simulador
+p num		Vuelca num posiciones de la pila
+q               Salir del Programa
+r               Visualiza el Banco de Registros
+r reg [valor]   Visualiza/Modifica el Contenido del Registro reg
+s fichero       Guarda una Imagen de Memoria desde fichero
+t               Resetea Registros/No Resetea Registros al ejecutar programa
+v dir num	Vuelca num posiciones de memoria a partir de la direccion dir
+-----------------------------------------------------------------------------

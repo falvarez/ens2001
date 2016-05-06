@@ -1,0 +1,859 @@
+move #pila,.sp
+move #4,.r9
+call /main
+halt
+Multiplicar:
+move .sp,.ix
+add .sp,.r9
+move .a,.sp
+move #0,.r1
+move .r1,#0[.ix]
+E_00000:
+move #-4[.ix],.r1
+cmp .r1,#0
+bz $2
+bp /E_00001
+move #0,.r1
+move .r1,#1[.ix]
+br /E_00002
+E_00001:
+move #1,.r1
+move .r1,#1[.ix]
+E_00002:
+move #1[.ix],.r1
+cmp .r1,#0
+bz /E_00003
+move #0[.ix],.r1
+add .r1,#-5[.ix]
+move .a,#2[.ix]
+move #2[.ix],.r1
+move .r1,#0[.ix]
+move #-4[.ix],.r1
+sub .r1,#1
+move .a,#3[.ix]
+move #3[.ix],.r1
+move .r1,#-4[.ix]
+br /E_00000
+E_00003:
+move #0[.ix],.r0
+move .ix,.sp
+ret
+FactorialRecursivo:
+move .sp,.ix
+add .sp,.r9
+move .a,.sp
+move #-4[.ix],.r1
+cmp .r1,#0
+bz /E_00004
+move #0,.r1
+move .r1,#0[.ix]
+br /E_00005
+E_00004:
+move #1,.r1
+move .r1,#0[.ix]
+E_00005:
+move #0[.ix],.r1
+cmp .r1,#0
+bz /E_00006
+move #1,.r0
+move .ix,.sp
+ret
+br /E_00003
+E_00006:
+move #-4[.ix],.r1
+sub .r1,#1
+move .a,#1[.ix]
+move #1[.ix],.r5
+push .r5
+move #0,.r9
+push .sr
+push .ix
+call /FactorialRecursivo
+pop .ix
+pop .sr
+sub .sp,#1
+move .a,.sp
+move .r0,#2[.ix]
+move #2[.ix],.r5
+push .r5
+move #-4[.ix],.r5
+push .r5
+move #4,.r9
+push .sr
+push .ix
+call /Multiplicar
+pop .ix
+pop .sr
+sub .sp,#2
+move .a,.sp
+move .r0,#3[.ix]
+move #3[.ix],.r0
+move .ix,.sp
+ret
+FactorialWhile:
+move .sp,.ix
+add .sp,.r9
+move .a,.sp
+move #0,.r1
+move .r1,#1[.ix]
+move #1,.r1
+move .r1,#0[.ix]
+E_00007:
+move #1[.ix],.r1
+cmp .r1,#-4[.ix]
+bn /E_00008
+move #0,.r1
+move .r1,#2[.ix]
+br /E_00009
+E_00008:
+move #1,.r1
+move .r1,#2[.ix]
+E_00009:
+move #2[.ix],.r1
+cmp .r1,#0
+bz /E_00010
+move #1[.ix],.r1
+add .r1,#1
+move .a,#3[.ix]
+move #3[.ix],.r5
+push .r5
+move #0[.ix],.r5
+push .r5
+move #4,.r9
+push .sr
+push .ix
+call /Multiplicar
+pop .ix
+pop .sr
+sub .sp,#2
+move .a,.sp
+move .r0,#4[.ix]
+move #4[.ix],.r1
+move .r1,#0[.ix]
+move #1[.ix],.r1
+add .r1,#1
+move .a,#5[.ix]
+move #5[.ix],.r1
+move .r1,#1[.ix]
+br /E_00007
+E_00010:
+move #0[.ix],.r0
+move .ix,.sp
+ret
+imprime:
+move .sp,.ix
+add .sp,.r9
+move .a,.sp
+move #-4[.ix],.r8
+WRINT .r8
+WRSTR /C_00000
+move .ix,.sp
+ret
+cuadrados:
+move .sp,.ix
+add .sp,.r9
+move .a,.sp
+move #0,.r1
+move .r1,#0[.ix]
+E_00011:
+move #0[.ix],.r1
+cmp .r1,#-5[.ix]
+bn /E_00012
+move #0,.r1
+move .r1,#1[.ix]
+br /E_00013
+E_00012:
+move #1,.r1
+move .r1,#1[.ix]
+E_00013:
+move #1[.ix],.r1
+cmp .r1,#0
+bz /E_00014
+move #0[.ix],.r4
+move #-4[.ix],.r3
+add .r3,.r4
+move .a,.r3
+move [.r3],.a
+move .a,#2[.ix]
+move #0[.ix],.r4
+move #-4[.ix],.r3
+add .r3,.r4
+move .a,.r3
+move [.r3],.a
+move .a,#3[.ix]
+move #3[.ix],.r5
+push .r5
+move #2[.ix],.r5
+push .r5
+move #4,.r9
+push .sr
+push .ix
+call /Multiplicar
+pop .ix
+pop .sr
+sub .sp,#2
+move .a,.sp
+move .r0,#4[.ix]
+move #0[.ix],.r4
+move #-4[.ix],.r3
+add .r3,.r4
+move .a,.r3
+move #4[.ix],.a
+move .a,[.r3]
+move #0[.ix],.r1
+add .r1,#1
+move .a,#5[.ix]
+move #5[.ix],.r1
+move .r1,#0[.ix]
+br /E_00011
+E_00014:
+move .ix,.sp
+ret
+Fecha_ponFecha:
+move .sp,.ix
+add .sp,.r9
+move .a,.sp
+move #-5[.ix],.r1
+move .r1,#0[.iy]
+move #-6[.ix],.r1
+move .r1,#1[.iy]
+move #-7[.ix],.r1
+move .r1,#2[.iy]
+move .ix,.sp
+ret
+Fecha_daDia:
+move .sp,.ix
+add .sp,.r9
+move .a,.sp
+move #0[.iy],.r0
+move .ix,.sp
+ret
+Fecha_daMes:
+move .sp,.ix
+add .sp,.r9
+move .a,.sp
+move #1[.iy],.r0
+move .ix,.sp
+ret
+Fecha_daAnno:
+move .sp,.ix
+add .sp,.r9
+move .a,.sp
+move #2[.iy],.r0
+move .ix,.sp
+ret
+Fecha_imprime:
+move .sp,.ix
+add .sp,.r9
+move .a,.sp
+move #0[.iy],.r8
+WRINT .r8
+WRSTR /C_00001
+move #1[.iy],.r8
+WRINT .r8
+WRSTR /C_00002
+move #2[.iy],.r8
+WRINT .r8
+move .ix,.sp
+ret
+Persona_ponNumero:
+move .sp,.ix
+add .sp,.r9
+move .a,.sp
+move #-5[.ix],.r1
+move .r1,#4[.iy]
+move .ix,.sp
+ret
+Persona_ponFechaNacimiento:
+move .sp,.ix
+add .sp,.r9
+move .a,.sp
+add #-7,.ix
+move .a,.r6
+add #0,.iy
+move .a,.r8
+move #3,.r7
+move [.r6],[.r8]
+inc .r8
+inc .r6
+dec .r7
+cmp .r7,#0
+bnz $-13
+push #5
+push #5
+push #5
+push .iy
+add #-7,.ix
+move .a,.iy
+move #0,.r9
+push .sr
+push .ix
+call /Fecha_ponFecha
+pop .ix
+pop .sr
+pop .iy
+sub .sp,#3
+move .a,.sp
+move .ix,.sp
+ret
+Persona_ponSexo:
+move .sp,.ix
+add .sp,.r9
+move .a,.sp
+move #-5[.ix],.r1
+move .r1,#3[.iy]
+move .ix,.sp
+ret
+Persona_daNumero:
+move .sp,.ix
+add .sp,.r9
+move .a,.sp
+move #4[.iy],.r0
+move .ix,.sp
+ret
+Persona_daFechaNacimiento:
+move .sp,.ix
+add .sp,.r9
+move .a,.sp
+add #0,.iy
+move .a,.r6
+add #-7,.ix
+move .a,.r8
+move #3,.r7
+move [.r6],[.r8]
+inc .r8
+inc .r6
+dec .r7
+cmp .r7,#0
+bnz $-13
+move .ix,.sp
+ret
+Persona_esMujer:
+move .sp,.ix
+add .sp,.r9
+move .a,.sp
+move #3[.iy],.r1
+move .r1,#0[.ix]
+not #0[.ix]
+move #0[.ix],.r0
+move .ix,.sp
+ret
+Persona_edad:
+move .sp,.ix
+add .sp,.r9
+move .a,.sp
+push .iy
+add #0,.iy
+move .a,.iy
+move #0,.r9
+push .sr
+push .ix
+call /Fecha_daAnno
+pop .ix
+pop .sr
+pop .iy
+move .r0,#0[.ix]
+move #2001,.r1
+sub .r1,#0[.ix]
+move .a,#1[.ix]
+move #1[.ix],.r0
+move .ix,.sp
+ret
+Persona_imprime:
+move .sp,.ix
+add .sp,.r9
+move .a,.sp
+WRSTR /C_00003
+WRSTR /C_00004
+move #4[.iy],.r8
+WRINT .r8
+WRSTR /C_00005
+move #3[.iy],.r8
+WRINT .r8
+WRSTR /C_00006
+push .iy
+move #2,.r9
+push .sr
+push .ix
+call /Persona_edad
+pop .ix
+pop .sr
+pop .iy
+move .r0,#0[.ix]
+move #0[.ix],.r8
+WRINT .r8
+WRSTR /C_00007
+push .iy
+add #0,.iy
+move .a,.iy
+move #0,.r9
+push .sr
+push .ix
+call /Fecha_imprime
+pop .ix
+pop .sr
+pop .iy
+WRSTR /C_00008
+move .ix,.sp
+ret
+personas:
+move .sp,.ix
+add .sp,.r9
+move .a,.sp
+push #1234
+push .iy
+add #0,.ix
+move .a,.iy
+move #0,.r9
+push .sr
+push .ix
+call /Persona_ponNumero
+pop .ix
+pop .sr
+pop .iy
+sub .sp,#1
+move .a,.sp
+move #4321,.r1
+push .iy
+add #5,.ix
+move .a,.iy
+move .r1,#4[.iy]
+pop .iy
+push #1969
+push #2
+push #11
+push .iy
+add #10,.ix
+move .a,.iy
+move #0,.r9
+push .sr
+push .ix
+call /Fecha_ponFecha
+pop .ix
+pop .sr
+pop .iy
+sub .sp,#3
+move .a,.sp
+add #10,.ix
+move .a,.r6
+move #3,.r7
+push [.r6]
+inc .r6
+dec .r7
+cmp .r7,#0
+bnz $-11
+push .iy
+add #0,.ix
+move .a,.iy
+move #0,.r9
+push .sr
+push .ix
+call /Persona_ponFechaNacimiento
+pop .ix
+pop .sr
+pop .iy
+sub .sp,#3
+move .a,.sp
+push .iy
+add #10,.ix
+move .a,.iy
+move #0,.r9
+push .sr
+push .ix
+call /Fecha_imprime
+pop .ix
+pop .sr
+pop .iy
+push #1975
+push #10
+push #13
+push .iy
+add #10,.ix
+move .a,.iy
+move #0,.r9
+push .sr
+push .ix
+call /Fecha_ponFecha
+pop .ix
+pop .sr
+pop .iy
+sub .sp,#3
+move .a,.sp
+add #10,.ix
+move .a,.r6
+move #3,.r7
+push [.r6]
+inc .r6
+dec .r7
+cmp .r7,#0
+bnz $-11
+push .iy
+add #5,.ix
+move .a,.iy
+move #0,.r9
+push .sr
+push .ix
+call /Persona_ponFechaNacimiento
+pop .ix
+pop .sr
+pop .iy
+sub .sp,#3
+move .a,.sp
+push #1
+push .iy
+add #0,.ix
+move .a,.iy
+move #0,.r9
+push .sr
+push .ix
+call /Persona_ponSexo
+pop .ix
+pop .sr
+pop .iy
+sub .sp,#1
+move .a,.sp
+push #0
+push .iy
+add #5,.ix
+move .a,.iy
+move #0,.r9
+push .sr
+push .ix
+call /Persona_ponSexo
+pop .ix
+pop .sr
+pop .iy
+sub .sp,#1
+move .a,.sp
+WRSTR /C_00009
+push .iy
+add #0,.ix
+move .a,.iy
+move #1,.r9
+push .sr
+push .ix
+call /Persona_imprime
+pop .ix
+pop .sr
+pop .iy
+push .iy
+add #5,.ix
+move .a,.iy
+move #1,.r9
+push .sr
+push .ix
+call /Persona_imprime
+pop .ix
+pop .sr
+pop .iy
+WRSTR /C_00010
+WRSTR /C_00011
+WRSTR /C_00012
+push .iy
+add #0,.ix
+move .a,.iy
+move #4[.iy],.r8
+pop .iy
+WRINT .r8
+WRSTR /C_00013
+push .iy
+add #0,.ix
+move .a,.iy
+move #1,.r9
+push .sr
+push .ix
+call /Persona_esMujer
+pop .ix
+pop .sr
+pop .iy
+move .r0,#13[.ix]
+move #13[.ix],.r1
+move .r1,#14[.ix]
+not #14[.ix]
+move #14[.ix],.r8
+WRINT .r8
+WRSTR /C_00014
+add #10,.ix
+move .a,.r6
+move #3,.r7
+push [.r6]
+inc .r6
+dec .r7
+cmp .r7,#0
+bnz $-11
+push .iy
+add #0,.ix
+move .a,.iy
+move #0,.r9
+push .sr
+push .ix
+call /Persona_daFechaNacimiento
+pop .ix
+pop .sr
+pop .iy
+sub .sp,#3
+move .a,.sp
+push .iy
+add #10,.ix
+move .a,.iy
+move #0,.r9
+push .sr
+push .ix
+call /Fecha_daAnno
+pop .ix
+pop .sr
+pop .iy
+move .r0,#15[.ix]
+move #2001,.r1
+sub .r1,#15[.ix]
+move .a,#16[.ix]
+move #16[.ix],.r8
+WRINT .r8
+WRSTR /C_00015
+push .iy
+add #10,.ix
+move .a,.iy
+move #0,.r9
+push .sr
+push .ix
+call /Fecha_imprime
+pop .ix
+pop .sr
+pop .iy
+move .ix,.sp
+ret
+demo:
+move .sp,.ix
+add .sp,.r9
+move .a,.sp
+WRSTR /C_00016
+move #1,.r4
+add .ix,#2
+add .r4,.a
+move .a ,.r8
+inint [.r8]
+move #2,.r4
+add .ix,#2
+add .r4,.a
+move .a ,.r8
+inint [.r8]
+move #3,.r4
+add .ix,#2
+add .r4,.a
+move .a ,.r8
+inint [.r8]
+move #4,.r1
+move .r1,#1[.ix]
+move #1[.ix],.r5
+push .r5
+add .ix,#2
+push .a
+move #6,.r9
+push .sr
+push .ix
+call /cuadrados
+pop .ix
+pop .sr
+sub .sp,#2
+move .a,.sp
+move #0,.r1
+move .r1,#0[.ix]
+E_00015:
+move #0[.ix],.r1
+cmp .r1,#1[.ix]
+bn /E_00016
+move #0,.r1
+move .r1,#16[.ix]
+br /E_00017
+E_00016:
+move #1,.r1
+move .r1,#16[.ix]
+E_00017:
+move #16[.ix],.r1
+cmp .r1,#0
+bz /E_00018
+move #0[.ix],.r4
+add .ix,#2
+add .r4,.a
+move .a,.r3
+move [.r3],.a
+move .a,#17[.ix]
+move #17[.ix],.r8
+WRINT .r8
+move #0[.ix],.r1
+add .r1,#1
+move .a,#18[.ix]
+move #18[.ix],.r1
+move .r1,#0[.ix]
+br /E_00015
+E_00018:
+move #1,.r1
+move .r1,#0[.ix]
+E_00019:
+move #0[.ix],.r1
+cmp .r1,#11
+bn /E_00020
+move #0,.r1
+move .r1,#19[.ix]
+br /E_00021
+E_00020:
+move #1,.r1
+move .r1,#19[.ix]
+E_00021:
+move #19[.ix],.r1
+cmp .r1,#0
+bz /E_00022
+move #0[.ix],.r1
+sub .r1,#1
+move .a,#20[.ix]
+move #20[.ix],.r4
+add .ix,#6
+add .r4,.a
+move .a,.r3
+move #0[.ix],.a
+move .a,[.r3]
+move #0[.ix],.r1
+add .r1,#1
+move .a,#21[.ix]
+move #21[.ix],.r1
+move .r1,#0[.ix]
+br /E_00019
+E_00022:
+push #10
+add .ix,#6
+push .a
+move #6,.r9
+push .sr
+push .ix
+call /cuadrados
+pop .ix
+pop .sr
+sub .sp,#2
+move .a,.sp
+move #0,.r1
+move .r1,#0[.ix]
+E_00023:
+move #0[.ix],.r1
+cmp .r1,#10
+bn /E_00024
+move #0,.r1
+move .r1,#22[.ix]
+br /E_00025
+E_00024:
+move #1,.r1
+move .r1,#22[.ix]
+E_00025:
+move #22[.ix],.r1
+cmp .r1,#0
+bz /E_00026
+move #0[.ix],.r4
+add .ix,#6
+add .r4,.a
+move .a,.r3
+move [.r3],.a
+move .a,#23[.ix]
+move #23[.ix],.r8
+WRINT .r8
+move #0[.ix],.r1
+add .r1,#1
+move .a,#24[.ix]
+move #24[.ix],.r1
+move .r1,#0[.ix]
+br /E_00023
+E_00026:
+WRSTR /C_00017
+move .ix,.sp
+ret
+main:
+move .sp,.ix
+add .sp,.r9
+move .a,.sp
+WRSTR /C_00018
+WRSTR /C_00019
+add .ix,#0
+move .a ,.r8
+inint [.r8]
+move #0[.ix],.r5
+push .r5
+move #6,.r9
+push .sr
+push .ix
+call /FactorialWhile
+pop .ix
+pop .sr
+sub .sp,#1
+move .a,.sp
+move .r0,#2[.ix]
+move #2[.ix],.r1
+move .r1,#1[.ix]
+WRSTR /C_00020
+move #0[.ix],.r5
+push .r5
+move #4,.r9
+push .sr
+push .ix
+call /FactorialRecursivo
+pop .ix
+pop .sr
+sub .sp,#1
+move .a,.sp
+move .r0,#3[.ix]
+move #3[.ix],.r5
+push .r5
+move #0,.r9
+push .sr
+push .ix
+call /imprime
+pop .ix
+pop .sr
+sub .sp,#1
+move .a,.sp
+WRSTR /C_00021
+move #1[.ix],.r5
+push .r5
+move #0,.r9
+push .sr
+push .ix
+call /imprime
+pop .ix
+pop .sr
+sub .sp,#1
+move .a,.sp
+move #25,.r9
+push .sr
+push .ix
+call /demo
+pop .ix
+pop .sr
+move #17,.r9
+push .sr
+push .ix
+call /personas
+pop .ix
+pop .sr
+move .ix,.sp
+ret
+C_00000 : data 10,0
+C_00001 : data 45,0
+C_00002 : data 45,0
+C_00003 : data 112,101,112,101,0
+C_00004 : data 44,32,99,111,110,32,68,78,73,32,110,-70,32,0
+C_00005 : data 44,32,0
+C_00006 : data 44,32,100,101,32,0
+C_00007 : data 97,-15,111,115,32,100,101,32,101,100,97,100,44,32,110,97,99,105,-13,32,101,108,32,0
+C_00008 : data 10,0
+C_00009 : data 86,111,121,32,97,32,105,109,112,114,105,109,105,114,32,108,111,115,32,100,97,116,111,115,32,113,117,101,32,104,101,32,114,101,99,111,112,105,108,97,100,111,58,10,0
+C_00010 : data 65,104,111,114,97,32,118,111,121,32,97,32,105,109,112,114,105,109,105,114,32,109,105,115,32,100,97,116,111,115,32,117,115,97,110,100,111,32,108,111,115,32,109,-23,116,111,100,111,115,58,10,0
+C_00011 : data 112,101,112,101,0
+C_00012 : data 44,32,99,111,110,32,68,78,73,32,110,-70,32,0
+C_00013 : data 44,32,0
+C_00014 : data 44,32,100,101,32,0
+C_00015 : data 97,-15,111,115,32,100,101,32,101,100,97,100,44,32,110,97,99,105,-13,32,101,108,32,0
+C_00016 : data 69,115,99,114,105,98,97,32,116,114,101,115,32,110,-6,109,101,114,111,115,58,32,0
+C_00017 : data 10,0
+C_00018 : data 69,108,32,70,97,99,116,111,114,105,97,108,10,0
+C_00019 : data 10,73,110,116,114,111,100,117,99,101,32,117,110,32,110,-6,109,101,114,111,0
+C_00020 : data 70,97,99,116,111,114,105,97,108,32,82,101,99,117,114,115,105,118,111,58,32,0
+C_00021 : data 70,97,99,116,111,114,105,97,108,32,87,104,105,108,101,58,32,0
+pila: res 1
+                                                                                                                                                   
