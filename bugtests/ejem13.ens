@@ -1,0 +1,176 @@
+move #pila,.sp
+move #4,.r9
+call /main
+halt
+Mamifero_QSoy:
+move .sp,.ix
+add .sp,.r9
+move .a,.sp
+WRSTR /C_00000
+move .ix,.sp
+ret
+Animal_Nombre:
+move .sp,.ix
+add .sp,.r9
+move .a,.sp
+move #0[.iy],#0[.ix]
+move #0[.ix],.r8
+WRINT .r8
+WRSTR /C_00001
+push .iy
+add #2,.iy
+move .a,.iy
+move #0,.r9
+push .sr
+push .ix
+call /Mamifero_QSoy
+pop .ix
+pop .sr
+move .a,.sp
+pop .iy
+move #0,.r0
+move .ix,.sp
+ret
+Animal_Especie:
+move .sp,.ix
+add .sp,.r9
+move .a,.sp
+move #-4[.ix],#0[.iy]
+move .ix,.sp
+ret
+Animal_especie:
+move .sp,.ix
+add .sp,.r9
+move .a,.sp
+move #0,.r0
+move .ix,.sp
+ret
+funcion:
+move .sp,.ix
+add .sp,.r9
+move .a,.sp
+push .iy
+add #-9,.ix
+move .a,.iy
+move #1[.iy],#0[.ix]
+pop .iy
+move #0[.ix],.r8
+WRINT .r8
+WRSTR /C_00002
+push .iy
+add #-9,.ix
+move .a,.iy
+move #0,.r9
+push .sr
+push .ix
+call /Animal_especie
+pop .ix
+pop .sr
+move .a,.sp
+move .r0,#1[.ix]
+pop .iy
+move #1[.ix],.r8
+WRINT .r8
+WRSTR /C_00003
+push .iy
+add #-5,.ix
+move .a,.iy
+move #0[.iy],#2[.ix]
+pop .iy
+move #2[.ix],.r8
+WRINT .r8
+WRSTR /C_00004
+push .iy
+add #-5,.ix
+move .a,.iy
+move #1[.iy],#3[.ix]
+pop .iy
+move #3[.ix],.r8
+WRINT .r8
+WRSTR /C_00005
+move #0,.r0
+move .ix,.sp
+ret
+main:
+move .sp,.ix
+add .sp,.r9
+move .a,.sp
+push .iy
+add #0,.ix
+move .a,.iy
+push #5
+move #0,.r9
+push .sr
+push .ix
+call /Animal_Especie
+pop .ix
+pop .sr
+sub .sp,#1
+move .a,.sp
+pop .iy
+push .iy
+add #0,.ix
+move .a,.iy
+push .iy
+add #2,.iy
+move .a,.iy
+move #8,#1[.iy]
+pop .iy
+pop .iy
+push .iy
+add #0,.ix
+move .a,.iy
+push .iy
+add #2,.iy
+move .a,.iy
+move #10,#0[.iy]
+pop .iy
+pop .iy
+push .iy
+add #0,.ix
+move .a,.iy
+move #1,.r9
+push .sr
+push .ix
+call /Animal_Nombre
+pop .ix
+pop .sr
+move .a,.sp
+pop .iy
+push .iy
+add #0,.ix
+move .a,.iy
+pop .iy
+add #2,.iy
+move .a,.r6
+move #0,.r7
+push [.r6]
+inc .r6
+dec .r7
+cmp .r7,#0
+bnz $-14
+add #0,.ix
+move .a,.r6
+move #0,.r7
+push [.r6]
+inc .r6
+dec .r7
+cmp .r7,#0
+bnz $-14
+move #4,.r9
+push .sr
+push .ix
+call /funcion
+pop .ix
+pop .sr
+move .a,.sp
+move #0,.r0
+move .ix,.sp
+ret
+C_00000 : data 83,111,121,32,117,110,32,77,97,109,111,110,10,0
+C_00001 : data 10,0
+C_00002 : data 10,0
+C_00003 : data 10,0
+C_00004 : data 10,0
+C_00005 : data 10,0
+pila:

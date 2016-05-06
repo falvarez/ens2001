@@ -1,0 +1,693 @@
+               org 0
+               move #65500,.sp
+               sub .sp,#48
+               move .a,.sp
+               call /main
+               halt
+kk:                    res  1
+f:
+               move .sp, .ix
+               move #0, #4[.ix]
+
+               move .sp, .ix
+               add  .sp,#3
+               move .a, #5[.ix]
+
+               move .sp, .ix
+               move #5[.ix], .r9
+               move #4[.ix], [.r9]
+
+iniciofor6:
+               move .sp, .ix
+               move #5, #8[.ix]
+
+               move .sp, .ix
+               move #24[.ix], #9[.ix]
+
+               move .sp, .ix
+               cmp  #8[.ix], #9[.ix]
+               bnz  /dist_9
+               move #0, #10[.ix]
+               br  /sig_9
+dist_9:
+               move #1, #10[.ix]
+sig_9:
+               move .sp, .ix
+               cmp  #1, #10[.ix]
+               bnz  /finfor6
+               move .sp, .ix
+               move #24[.ix], #9[.ix]
+
+               move .sp, .ix
+               move #9[.ix], .r8
+               wrint .r8
+               move .sp, .ix
+               move #1, #12[.ix]
+
+               move .sp, .ix
+               move #24[.ix], #9[.ix]
+
+               move .sp, .ix
+               add   #9[.ix], #12[.ix]
+               move .a, #14[.ix]
+
+               move .sp, .ix
+               move #14[.ix],.r1
+               sub  .ix, #0
+               move .a, .ix
+               move .r1, [.ix]
+
+               sub .sp, #23
+               move .a, .sp
+               call /f
+               move .sp,.ix
+               move #1[.ix],.r9
+               add  .sp, #23
+               move .a, .sp
+               move .sp,.ix
+               move  .r9,#15[.ix]
+
+               move .sp, .ix
+               move #15[.ix], .r8
+               wrint .r8
+               move .sp, .ix
+               move #24[.ix], #9[.ix]
+
+               move .sp, .ix
+               move #9[.ix], .r8
+               wrint .r8
+               move .sp, .ix
+               move #1, #12[.ix]
+
+               move .sp, .ix
+               move #3[.ix], #18[.ix]
+
+               move .sp, .ix
+               add   #18[.ix], #12[.ix]
+               move .a, #19[.ix]
+
+               move .sp, .ix
+               add  .sp,#3
+               move .a, #5[.ix]
+
+               move .sp, .ix
+               move #5[.ix], .r9
+               move #19[.ix], [.r9]
+
+               br /iniciofor6
+finfor6:
+               move .sp, .ix
+               move #kk, .r4
+               move [.r4], #23[.ix]
+
+               move .sp, .ix
+               move #23[.ix],#2[.ix]
+
+               ret
+CAMION_inicializarcamion:
+               wrstr /cad_0
+               move .sp, .ix
+               add  .sp,#40
+               move .a, #3[.ix]
+
+               move .sp, .ix
+               move #3[.ix], .r9
+               inint .r8
+               move .r8, [.r9]
+
+               wrstr /cad_1
+               move .sp, .ix
+               add  .sp,#41
+               move .a, #4[.ix]
+
+               move .sp, .ix
+               move #4[.ix], .r9
+               inint .r8
+               move .r8, [.r9]
+
+               move .sp, .ix
+               move #0, #5[.ix]
+
+               move .sp, .ix
+               add  .sp,#2
+               move .a, #6[.ix]
+
+               move .sp, .ix
+               move #6[.ix], .r9
+               move #5[.ix], [.r9]
+
+iniciofor32:
+               move .sp, .ix
+               move #4, #9[.ix]
+
+               move .sp, .ix
+               move #2[.ix], #10[.ix]
+
+               move .sp, .ix
+               cmp  #9[.ix], #10[.ix]
+               bnz  /dist_34
+               move #0, #11[.ix]
+               br  /sig_34
+dist_34:
+               move #1, #11[.ix]
+sig_34:
+               move .sp, .ix
+               cmp  #1, #11[.ix]
+               bnz  /finfor32
+               move .sp, .ix
+               move #2[.ix], #10[.ix]
+
+               move .sp, .ix
+               move #2[.ix], #10[.ix]
+
+               move .sp, .ix
+               add  #10[.ix],#43
+               add .a, .ix
+               move .a, #14[.ix]
+
+               move .sp, .ix
+               move #14[.ix], .r9
+               move #10[.ix], [.r9]
+
+               move .sp, .ix
+               move #1, #16[.ix]
+
+               move .sp, .ix
+               move #2[.ix], #10[.ix]
+
+               move .sp, .ix
+               add   #10[.ix], #16[.ix]
+               move .a, #18[.ix]
+
+               move .sp, .ix
+               add  .sp,#2
+               move .a, #6[.ix]
+
+               move .sp, .ix
+               move #6[.ix], .r9
+               move #18[.ix], [.r9]
+
+               br /iniciofor32
+finfor32:
+               wrstr /cad_2
+               move .sp, .ix
+               move #40[.ix], #22[.ix]
+
+               move .sp, .ix
+               move #22[.ix], .r8
+               wrint .r8
+               wrstr /cad_3
+               move .sp, .ix
+               move #41[.ix], #23[.ix]
+
+               move .sp, .ix
+               move #23[.ix], .r8
+               wrint .r8
+               wrstr /cad_4
+               move .sp, .ix
+               move #0, #5[.ix]
+
+               move .sp, .ix
+               add  .sp,#2
+               move .a, #6[.ix]
+
+               move .sp, .ix
+               move #6[.ix], .r9
+               move #5[.ix], [.r9]
+
+iniciofor47:
+               move .sp, .ix
+               move #4, #9[.ix]
+
+               move .sp, .ix
+               move #2[.ix], #10[.ix]
+
+               move .sp, .ix
+               cmp  #9[.ix], #10[.ix]
+               bnz  /dist_48
+               move #0, #30[.ix]
+               br  /sig_48
+dist_48:
+               move #1, #30[.ix]
+sig_48:
+               move .sp, .ix
+               cmp  #1, #30[.ix]
+               bnz  /finfor47
+               wrstr /cad_5
+               move .sp, .ix
+               move #2[.ix], #10[.ix]
+
+               move .sp, .ix
+               move #10[.ix], .r8
+               wrint .r8
+               wrstr /cad_6
+               move .sp, .ix
+               move #2[.ix], #10[.ix]
+
+               move .sp, .ix
+               add  #10[.ix],#43
+               add .a, .ix
+               move [.a], #33[.ix]
+
+               move .sp, .ix
+               move #33[.ix], .r8
+               wrint .r8
+               wrstr /cad_7
+               move .sp, .ix
+               move #1, #16[.ix]
+
+               move .sp, .ix
+               move #2[.ix], #10[.ix]
+
+               move .sp, .ix
+               add   #10[.ix], #16[.ix]
+               move .a, #18[.ix]
+
+               move .sp, .ix
+               add  .sp,#2
+               move .a, #6[.ix]
+
+               move .sp, .ix
+               move #6[.ix], .r9
+               move #18[.ix], [.r9]
+
+               br /iniciofor47
+finfor47:
+               ret
+CAMION_apto_para_conducir:
+               move .sp, .ix
+               move #2, #4[.ix]
+
+               move .sp, .ix
+               add  #4[.ix], #vec 
+               move [.a], #5[.ix]
+
+               move .sp, .ix
+               move #0, #6[.ix]
+
+               move .sp, .ix
+               add  #6[.ix], #vec 
+               move [.a], #7[.ix]
+
+               move .sp, .ix
+               add   #7[.ix], #5[.ix]
+               move .a, #8[.ix]
+
+               move .sp, .ix
+               cmp  #8[.ix],#0
+               bz  /devolv065
+               move .sp, .ix
+               move #3, #9[.ix]
+
+               move .sp, .ix
+               add  #9[.ix], #vec 
+               move [.a], #10[.ix]
+
+               move .sp, .ix
+               cmp  #10[.ix],#0
+               bz  /devolv065
+               move .sp, .ix
+               move   #1, #14[.ix]
+               br /finand65
+devolv065:
+               move .sp, .ix
+               move   #0, #14[.ix]
+finand65:
+               move .sp, .ix
+               add  .sp,#3
+               move .a, #15[.ix]
+
+               move .sp, .ix
+               move #15[.ix], .r9
+               move #14[.ix], [.r9]
+
+               move .sp, .ix
+               move #1, #17[.ix]
+
+               move .sp, .ix
+               move #17[.ix],#2[.ix]
+
+               ret
+CAMION_calcularmasa:
+               move .sp, .ix
+               move #17[.ix], #3[.ix]
+
+               move .sp, .ix
+               move #17[.ix], #3[.ix]
+
+               move .sp, .ix
+               add   #3[.ix], #3[.ix]
+               move .a, #5[.ix]
+
+               move .sp, .ix
+               move #19[.ix], #6[.ix]
+
+               move .sp, .ix
+               add   #6[.ix], #5[.ix]
+               move .a, #7[.ix]
+
+               move .sp, .ix
+               add  .sp,#20
+               move .a, #8[.ix]
+
+               move .sp, .ix
+               move #8[.ix], .r9
+               move #7[.ix], [.r9]
+
+               wrstr /cad_8
+               move .sp, .ix
+               move #20[.ix], #10[.ix]
+
+               move .sp, .ix
+               move #10[.ix], .r8
+               wrint .r8
+               wrstr /cad_9
+               move .sp, .ix
+               move #1, #11[.ix]
+
+               move .sp, .ix
+               move #11[.ix],.r1
+               sub  .ix, #0
+               move .a, .ix
+               move .r1, [.ix]
+
+               sub .sp, #23
+               move .a, .sp
+               call /f
+               move .sp,.ix
+               move #1[.ix],.r9
+               add  .sp, #23
+               move .a, .sp
+               move .sp,.ix
+               move  .r9,#12[.ix]
+
+               move .sp, .ix
+               move #12[.ix], .r8
+               wrint .r8
+               move .sp, .ix
+               move #88, #13[.ix]
+
+               move .sp, .ix
+               move #kk, #14[.ix]
+
+               move .sp, .ix
+               move #14[.ix], .r9
+               move #13[.ix], [.r9]
+
+               move .sp, .ix
+               move #20[.ix], #10[.ix]
+
+               move .sp, .ix
+               move #10[.ix],#2[.ix]
+
+               ret
+main:
+               move .sp, .ix
+               move #33, #17[.ix]
+
+               move .sp, .ix
+               move #kk, #18[.ix]
+
+               move .sp, .ix
+               move #18[.ix], .r9
+               move #17[.ix], [.r9]
+
+               move .sp, .ix
+               move .sp,.ix
+               move  #8[.ix],#0[.ix]
+
+               move  #7[.ix],#-1[.ix]
+
+               move  #6[.ix],#-2[.ix]
+
+               move  #5[.ix],#-3[.ix]
+
+               move  #4[.ix],#-4[.ix]
+
+               move  #3[.ix],#-5[.ix]
+
+               move  #2[.ix],#-6[.ix]
+
+               sub .sp, #45
+               move .a, .sp
+               call /CAMION_inicializarcamion
+               move .sp,.ix
+               move #1[.ix],.r9
+               add  .sp, #45
+               move .a, .sp
+               move .sp,.ix
+               move  .r9,#20[.ix]
+
+               move .sp,.ix
+               move  #-6[.ix],#2[.ix]
+
+               move  #-5[.ix],#3[.ix]
+
+               move  #-4[.ix],#4[.ix]
+
+               move  #-3[.ix],#5[.ix]
+
+               move  #-2[.ix],#6[.ix]
+
+               move  #-1[.ix],#7[.ix]
+
+               move  #0[.ix],#8[.ix]
+
+               move .sp, .ix
+               move #300, #21[.ix]
+
+               move .sp, .ix
+               move #21[.ix],.r1
+               sub  .ix, #0
+               move .a, .ix
+               move .r1, [.ix]
+
+               move .sp, .ix
+               move [.ix],#-7[.ix]
+               sub .ix,#1
+               move .a,.ix
+
+               move .sp,.ix
+               move  #8[.ix],#0[.ix]
+
+               move  #7[.ix],#-1[.ix]
+
+               move  #6[.ix],#-2[.ix]
+
+               move  #5[.ix],#-3[.ix]
+
+               move  #4[.ix],#-4[.ix]
+
+               move  #3[.ix],#-5[.ix]
+
+               move  #2[.ix],#-6[.ix]
+
+               sub .sp, #23
+               move .a, .sp
+               call /CAMION_calcularmasa
+               move .sp,.ix
+               move #1[.ix],.r9
+               add  .sp, #23
+               move .a, .sp
+               move .sp,.ix
+               move  .r9,#22[.ix]
+
+               move .sp,.ix
+               move  #-6[.ix],#2[.ix]
+
+               move  #-5[.ix],#3[.ix]
+
+               move  #-4[.ix],#4[.ix]
+
+               move  #-3[.ix],#5[.ix]
+
+               move  #-2[.ix],#6[.ix]
+
+               move  #-1[.ix],#7[.ix]
+
+               move  #0[.ix],#8[.ix]
+
+               move .sp, .ix
+               add  .sp,#9
+               move .a, #23[.ix]
+
+               move .sp, .ix
+               move #23[.ix], .r9
+               move #22[.ix], [.r9]
+
+               wrstr /cad_10
+               move .sp, .ix
+               move  #2[.ix],#25[.ix]
+
+               move .sp, .ix
+               move #25[.ix], .r8
+               wrint .r8
+               wrstr /cad_11
+               move .sp, .ix
+               move  #3[.ix],#26[.ix]
+
+               move .sp, .ix
+               move #26[.ix], .r8
+               wrint .r8
+               wrstr /cad_12
+               move .sp, .ix
+               move  #4[.ix],#27[.ix]
+
+               move .sp, .ix
+               move #27[.ix], .r8
+               wrint .r8
+               move .sp, .ix
+               move #1, #28[.ix]
+
+               move .sp, .ix
+               move #0, #29[.ix]
+
+               move .sp, .ix
+               add  #29[.ix],#11
+               add .a, .ix
+               move .a, #30[.ix]
+
+               move .sp, .ix
+               move #30[.ix], .r9
+               move #28[.ix], [.r9]
+
+               move .sp, .ix
+               move #2, #32[.ix]
+
+               move .sp, .ix
+               move #1, #28[.ix]
+
+               move .sp, .ix
+               add  #28[.ix],#11
+               add .a, .ix
+               move .a, #34[.ix]
+
+               move .sp, .ix
+               move #34[.ix], .r9
+               move #32[.ix], [.r9]
+
+               move .sp, .ix
+               move #3, #36[.ix]
+
+               move .sp, .ix
+               move #2, #32[.ix]
+
+               move .sp, .ix
+               add  #32[.ix],#11
+               add .a, .ix
+               move .a, #38[.ix]
+
+               move .sp, .ix
+               move #38[.ix], .r9
+               move #36[.ix], [.r9]
+
+               move .sp, .ix
+               move #4, #40[.ix]
+
+               move .sp, .ix
+               move #3, #36[.ix]
+
+               move .sp, .ix
+               add  #36[.ix],#11
+               add .a, .ix
+               move .a, #42[.ix]
+
+               move .sp, .ix
+               move #42[.ix], .r9
+               move #40[.ix], [.r9]
+
+               move .sp, .ix
+               move  #5[.ix],#44[.ix]
+
+               move .sp, .ix
+               move #44[.ix],.r1
+               sub  .ix, #0
+               move .a, .ix
+               move .r1, [.ix]
+
+               move .sp, .ix
+               move [.ix],#-7[.ix]
+               sub .ix,#1
+               move .a,.ix
+
+               move .sp,.ix
+               move  #8[.ix],#0[.ix]
+
+               move  #7[.ix],#-1[.ix]
+
+               move  #6[.ix],#-2[.ix]
+
+               move  #5[.ix],#-3[.ix]
+
+               move  #4[.ix],#-4[.ix]
+
+               move  #3[.ix],#-5[.ix]
+
+               move  #2[.ix],#-6[.ix]
+
+               sub .sp, #23
+               move .a, .sp
+               call /CAMION_apto_para_conducir
+               move .sp,.ix
+               move #1[.ix],.r9
+               add  .sp, #23
+               move .a, .sp
+               move .sp,.ix
+               move  .r9,#45[.ix]
+
+               move .sp,.ix
+               move  #-6[.ix],#2[.ix]
+
+               move  #-5[.ix],#3[.ix]
+
+               move  #-4[.ix],#4[.ix]
+
+               move  #-3[.ix],#5[.ix]
+
+               move  #-2[.ix],#6[.ix]
+
+               move  #-1[.ix],#7[.ix]
+
+               move  #0[.ix],#8[.ix]
+
+               move .sp, .ix
+               add  .sp,#10
+               move .a, #46[.ix]
+
+               move .sp, .ix
+               move #46[.ix], .r9
+               move #45[.ix], [.r9]
+
+               wrstr /cad_13
+               move .sp, .ix
+               move #10[.ix], #48[.ix]
+
+               move .sp, .ix
+               move #48[.ix], .r8
+               wrint .r8
+               move .sp, .ix
+               move #kk, .r4
+               move [.r4], #49[.ix]
+
+               move .sp, .ix
+               move #49[.ix], .r8
+               wrint .r8
+               ret
+
+
+
+vec:res 100
+cad_13:         data  "\n\n El camion es apto para conducir: "
+cad_12:         data  "\n"
+cad_11:         data  "\n"
+cad_10:         data  "\nDatos del camion pegaso:\n"
+cad_9:         data  "\n"
+cad_8:         data  "La masa del camion es:"
+cad_7:         data  "\n"
+cad_6:         data  ": "
+cad_5:         data  "  Rueda"
+cad_4:         data  "\n"
+cad_3:         data  ", longitud= "
+cad_2:         data  "peso= "
+cad_1:         data  "\nIntroduzca la longitud del camion:\n"
+cad_0:         data  "Introduzca el peso del camion:\n"

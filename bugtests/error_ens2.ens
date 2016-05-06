@@ -1,0 +1,244 @@
+;------------------------------------------------------
+;           COMIENZO DEL PROGRAMA ENSAMBLADOR          
+;                                                      
+; Practica de Compiladores, curso 2001/2002            
+; Compilador de un subconjunto del lenguaje C++        
+; Grupo 12                                             
+;                                                      
+; Condiciones de funcionamiento:                       
+; - El PC debe empezar en la direccion 0               
+; - La pila debe crecer en sentido descendente         
+;                                                      
+; El siguiente fragmento de codigo:                    
+; - Inicializa el SP                                   
+; - Inicializa el puntero a la zona de datos estaticos 
+; - Llama a la rutina principal                        
+; - Genera el codigo de la funcion strlen              
+;------------------------------------------------------
+
+      move #65535, .sp
+      move #VG, .iy
+      br /INICIO
+
+;------------------------------------------------------
+;                        FUNCION                       
+;                                                      
+; NOMBRE: strlen
+;------------------------------------------------------
+
+STRLEN: nop
+      push .ix
+      push .sr
+      add .sp, #6
+      move .a, .ix
+      move [.ix], .r1
+      move #0, .r2
+SIGUE: cmp [.r1], #0
+      bz $GUARDA
+      inc .r2
+      inc .r1
+      br $SIGUE
+GUARDA: move .r2, #-1[.ix]
+      SALIR: pop .sr
+      pop .ix
+      ret 
+
+;------------------------------------------------------
+;                        FUNCION                       
+;                                                      
+; NOMBRE: factorial
+;------------------------------------------------------
+
+ETQ1: nop
+      push .ix
+      push .sr
+      add .sp, #6
+      move .a, .ix
+      ;------>Comienzo de un if
+      ;[VALOR] 1tmp:= 0
+      move #0, #1[.ix]
+      ;[OPERACION] 2tmp:= a == 1tmp
+      cmp #0[.ix], #1[.ix]
+      bnz $ETQ4
+      move #1, #2[.ix]
+      br $ETQ5
+
+ETQ4: nop
+      move #0, #2[.ix]
+
+ETQ5: nop
+      ;[ASIG INTERNA] 3tmp := 2tmp
+      move #2[.ix], #3[.ix]
+      ;SALTA A (ETQ3) si 3tmp==0
+      cmp #3[.ix],#0
+      bz /ETQ3
+      ;------>if: Codigo si condicion cierta
+      ;------>Comienzo de un return
+      ;[VALOR] 4tmp:= 1
+      move #1, #4[.ix]
+      ;[ASIG INTERNA] 5tmp := 4tmp
+      move #4[.ix], #5[.ix]
+      ;DEVOLVER (5tmp)
+      move #5[.ix], #-1[.ix]
+      br /SALIR
+      ;------>return: fin de la sentencia
+      ;SALTA A (ETQ2)
+      br /ETQ2
+      ;------>if: Codigo del else
+
+ETQ3: nop
+      ;------>Comienzo de un return
+      ;Se prepara el RA para llamar a factorial
+      ;[CREAR RA] .sp:=.sp-102
+      sub .sp, #102
+      move .a, .sp
+      ;[VALOR] 6tmp:= 1
+      move #1, #6[.ix]
+      ;[OPERACION] 7tmp:= a - 6tmp
+      sub #0[.ix], #6[.ix]
+      move .a, #7[.ix]
+      ;[ASIG INTERNA] 8tmp := 7tmp
+      move #7[.ix], #8[.ix]
+      ;PARAMETRO (8tmp)
+      add .sp, #3
+      move #8[.ix], [.a]
+      ;[LLAMADA] 9tmp:=factorial con 1 args (etiqueta: ETQ1)
+      call /ETQ1
+      ;Se recoge el valor devuelto
+      add .sp, #2
+      move [.a], #9[.ix]
+      ;Se deshace el RA del llamado
+      add .sp, #102
+      move .a, .sp
+      ;[OPERACION] 10tmp:= a * 9tmp
+      mul #0[.ix], #9[.ix]
+      move .a, #10[.ix]
+      ;[ASIG INTERNA] 11tmp := 10tmp
+      move #10[.ix], #11[.ix]
+      ;[ASIG INTERNA] 12tmp := 11tmp
+      move #11[.ix], #12[.ix]
+      ;DEVOLVER (12tmp)
+      move #12[.ix], #-1[.ix]
+      br /SALIR
+      ;------>return: fin de la sentencia
+      ;------>if: fin de la sentencia
+
+ETQ2: nop
+      br /SALIR
+
+;------------------------------------------------------
+;                        FUNCION                       
+;                                                      
+; NOMBRE: main
+;------------------------------------------------------
+
+MAIN: nop
+      push .ix
+      push .sr
+      add .sp, #6
+      move .a, .ix
+      ;------>Comienzo de un cout
+      ;[VALOR] 13tmp:= "Introduce un numero: "
+      move #ETQ6, #1[.ix]
+      ;[ASIG INTERNA] 14tmp := 13tmp
+      move #1[.ix], #2[.ix]
+      ;SALIDA (14tmp)
+      move #2[.ix], .r1
+      wrstr [.r1]
+      ;------>cout: fin de la sentencia
+      ;------>Comienzo de un cin
+      ;ENTRADA (num)
+      inint #0[.ix]
+      ;------>cin: fin de la sentencia
+      ;------>Comienzo de un cout
+      ;[VALOR] 15tmp:= endl
+      move #FDL, #3[.ix]
+      ;[ASIG INTERNA] 16tmp := 15tmp
+      move #3[.ix], #4[.ix]
+      ;SALIDA (16tmp)
+      move #4[.ix], .r1
+      wrstr [.r1]
+      ;------>cout: fin de la sentencia
+      ;------>Comienzo de un cout
+      ;[VALOR] 17tmp:= "El factorial de "
+      move #ETQ7, #5[.ix]
+      ;[ASIG INTERNA] 18tmp := 17tmp
+      move #5[.ix], #6[.ix]
+      ;SALIDA (18tmp)
+      move #6[.ix], .r1
+      wrstr [.r1]
+      ;[ASIG INTERNA] 19tmp := num
+      move #0[.ix], #7[.ix]
+      ;SALIDA (19tmp)
+      wrint #7[.ix]
+      ;[VALOR] 20tmp:= " es: "
+      move #ETQ8, #8[.ix]
+      ;[ASIG INTERNA] 21tmp := 20tmp
+      move #8[.ix], #9[.ix]
+      ;SALIDA (21tmp)
+      move #9[.ix], .r1
+      wrstr [.r1]
+      ;Se prepara el RA para llamar a factorial
+      ;[CREAR RA] .sp:=.sp-15
+      sub .sp, #15
+      move .a, .sp
+      ;[ASIG INTERNA] 22tmp := num
+      move #0[.ix], #10[.ix]
+      ;PARAMETRO (22tmp)
+      add .sp, #3
+      move #10[.ix], [.a]
+      ;[LLAMADA] 23tmp:=factorial con 1 args (etiqueta: ETQ1)
+      call /ETQ1
+      ;Se recoge el valor devuelto
+      add .sp, #2
+      move [.a], #11[.ix]
+      ;Se deshace el RA del llamado
+      add .sp, #15
+      move .a, .sp
+      ;[ASIG INTERNA] 24tmp := 23tmp
+      move #11[.ix], #12[.ix]
+      ;SALIDA (24tmp)
+      wrint #12[.ix]
+      ;[VALOR] 25tmp:= endl
+      move #FDL, #13[.ix]
+      ;[ASIG INTERNA] 26tmp := 25tmp
+      move #13[.ix], #14[.ix]
+      ;SALIDA (26tmp)
+      move #14[.ix], .r1
+      wrstr [.r1]
+      ;------>cout: fin de la sentencia
+      ;------>Comienzo de un return
+      ;DEVOLVER (nada)  [retorno main]
+      br /SALIR
+      ;------>return: fin de la sentencia
+      br /SALIR
+;------------------------------------------------------
+;           RUTINA PRINCIPAL DEL PROGRAMA              
+;                                                      
+; - Prepara el registro de activación de main          
+; - Llama a main                                       
+; - Para la ejecución                                  
+;------------------------------------------------------
+
+INICIO: nop
+      ;Se prepara el RA para llamar a main
+      ;[CREAR RA] .sp:=.sp-17
+      sub .sp, #17
+      move .a, .sp
+      call /MAIN
+      halt
+
+;------------------------------------------------------
+;        ZONA DE MEMORIA PARA DATOS ESTATICOS          
+;                                                      
+; - Variables globales                                 
+; - Constantes de tipo cadena                          
+;------------------------------------------------------
+
+VG:   res 0
+FDL: data "\n"
+ETQ6: data "Introduce un numero: "
+ETQ7: data "El factorial de "
+ETQ8: data " es: "
+
+end
