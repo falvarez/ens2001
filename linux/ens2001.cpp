@@ -34,14 +34,14 @@ int main(int argc,char *argv[])
         if(conf->CargarConfiguracion()!=0)
         {
             //Se usaron las opciones por defecto
-            cout<<"Fichero de configuracion (ens2001.cfg) ";
-            cout<<"no encontrado o erroneo"<<endl;
-            cout<<"Se usaran las opciones por defecto"<<endl;
+            cout<<"Fichero de configuración (ens2001.cfg) ";
+            cout<<"no encontrado o erróneo"<<endl;
+            cout<<"Se usarán las opciones por defecto"<<endl;
         }
         else
         {
-            cout<<"Fichero de configuracion (ens2001.cfg) ";
-            cout<<"cargado con exito"<<endl;
+            cout<<"Fichero de configuración (ens2001.cfg) ";
+            cout<<"cargado con éxito"<<endl;
         }
         cout<<endl;
         ifaz->EstadoInicialSimulador();
@@ -75,12 +75,12 @@ int main(int argc,char *argv[])
     }
     catch(bad_alloc)
     {
-        cerr<<"ERROR: Al reservar espacio dinamico"<<endl;
+        cerr<<"ERROR: Al reservar espacio dinámico"<<endl;
         return -1;
     }
-    catch(runtime_error)
+    catch(std::runtime_error)
     {
-        cerr<<"ERROR: En tiempo de ejecucion no contemplado"<<endl;
+        cerr<<"ERROR: En tiempo de ejecución no contemplado"<<endl;
         return -1;
     }
 }

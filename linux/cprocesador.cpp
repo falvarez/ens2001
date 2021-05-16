@@ -37,7 +37,7 @@ int CProcesador::Ejecutar(void)
         {
             FetchInstruccion(registroauxiliar);
         }
-        catch(runtime_error)
+        catch(std::runtime_error)
         {
             resultadoejecucion=EJ_EXCEPCION;
             delete(gestorinstrucciones);
@@ -52,7 +52,7 @@ int CProcesador::Ejecutar(void)
         {
             FetchOperandos(md1,op1,md2,op2);
         }
-        catch(runtime_error)
+        catch(std::runtime_error)
         {
             resultadoejecucion=EJ_EXCEPCION;
             delete(gestorinstrucciones);
@@ -81,10 +81,10 @@ int CProcesador::Ejecutar(void)
             {
                 conf->BancoRegistros()->
                     EscribirRegistroExcepcion(EX_INSTRUCCION_NO_IMPLEMENTADA);
-                throw runtime_error("Instruccion no implementada");
+                throw std::runtime_error("Instruccion no implementada");
             }
         }
-        catch(runtime_error)
+        catch(std::runtime_error)
         {
             //Se produjo una excepcion
             //El codigo que lanza la excepcion se encarga de actualizar
@@ -157,7 +157,7 @@ int CProcesador::EjecutarPaso(void)
     {
         FetchInstruccion(registroauxiliar);
     }
-    catch(runtime_error)
+    catch(std::runtime_error)
     {
         resultadoejecucion=EJ_EXCEPCION;
         delete(gestorinstrucciones);
@@ -172,7 +172,7 @@ int CProcesador::EjecutarPaso(void)
     {
         FetchOperandos(md1,op1,md2,op2);
     }
-    catch(runtime_error)
+    catch(std::runtime_error)
     {
         resultadoejecucion=EJ_EXCEPCION;
         delete(gestorinstrucciones);
@@ -201,10 +201,10 @@ int CProcesador::EjecutarPaso(void)
         {
             conf->BancoRegistros()->
                 EscribirRegistroExcepcion(EX_INSTRUCCION_NO_IMPLEMENTADA);
-            throw runtime_error("Instruccion no implementada");
+            throw std::runtime_error("Instruccion no implementada");
         }
     }
-    catch(runtime_error)
+    catch(std::runtime_error)
     {
         //Se produjo una excepcion
         //El codigo que lanza la excepcion se encarga de actualizar
@@ -250,7 +250,7 @@ void CProcesador::FetchInstruccion(CEntero16b &codop)
     {
         //Se ha sobrepasado el limite superior de memoria
         conf->BancoRegistros()->EscribirRegistroExcepcion(EX_FINALMEMORIA);
-        throw runtime_error("PC supero el limite de memoria");
+        throw std::runtime_error("PC supero el limite de memoria");
     }
     conf->BancoRegistros()->Escribir(PC,pc);
     return;
@@ -287,7 +287,7 @@ void CProcesador::FetchOperandos(int md1,int &op1,int md2,int &op2)
         {
             //Se ha sobrepasado el limite superior de memoria
             conf->BancoRegistros()->EscribirRegistroExcepcion(EX_FINALMEMORIA);
-            throw runtime_error("PC supero el limite de memoria");
+            throw std::runtime_error("PC supero el limite de memoria");
         }
     }
     else
@@ -312,7 +312,7 @@ void CProcesador::FetchOperandos(int md1,int &op1,int md2,int &op2)
                 //Se ha sobrepasado el limite superior de memoria
                 conf->BancoRegistros()->
                     EscribirRegistroExcepcion(EX_FINALMEMORIA);
-                throw runtime_error("PC supero el limite de memoria");
+                throw std::runtime_error("PC supero el limite de memoria");
             }
         }
         //Tenemos el operando en el registro auxiliar

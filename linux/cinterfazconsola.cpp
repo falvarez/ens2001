@@ -174,7 +174,7 @@ int CInterfazConsola::CargarMemoria(CCadena fichero)
             return 0;
         }
     }
-    catch(runtime_error)
+    catch(std::runtime_error)
     {
         //Se produjo un error al rellenar la memoria -> datos incorrectos
         cout<<S_CADENA_043<<fichero<<S_CADENA_044<<endl;
@@ -250,7 +250,7 @@ int CInterfazConsola::Desensamblar(CCadena dir,CCadena num)
         delete(desens);
         return 0;
     }
-    catch(runtime_error)
+    catch(std::runtime_error)
     {
         cout<<S_CADENA_019<<parametro<<endl; //ERROR: Parametro incorrecto -
         //Hay que liberar los recursos previamente creados
@@ -497,7 +497,7 @@ int CInterfazConsola::EscribirRegistro(CCadena registro,CCadena valor)
         }
         return 0;
      }
-     catch(runtime_error)
+     catch(std::runtime_error)
      {
         if(conf->BancoRegistros()->RegistroExcepcion()==EX_SP_INVADE_CODIGO)
         {
@@ -628,7 +628,7 @@ int CInterfazConsola::IntercambiarComprobarPC(void)
     {
         conf->EscribirComprobarPC(NO);
         cout<<S_CADENA_072<<endl; 
-            //No se comprobara si el PC invade el espacio de pilaç
+            //No se comprobara si el PC invade el espacio de pilaï¿½
     }
     return 0;
 }
@@ -720,7 +720,7 @@ int CInterfazConsola::IntercambiarPuntoRuptura(CCadena direccion)
         cout<<endl;
         return 0;
     }
-    catch(runtime_error)
+    catch(std::runtime_error)
     {
         cout<<S_CADENA_019<<"dir"<<endl; //ERROR: Parametro incorrecto -
         return -1;
@@ -872,7 +872,7 @@ int CInterfazConsola::LeerMemoria(CCadena direccion)
         }
         return 0;
     }
-    catch(runtime_error)
+    catch(std::runtime_error)
     {
         cout<<S_CADENA_042<<endl; //ERROR: Direccion fuera de rango
         return -1;
@@ -913,7 +913,7 @@ int CInterfazConsola::LeerRegistro(CCadena registro)
         }
         return 0;
     }
-    catch(runtime_error)
+    catch(std::runtime_error)
     {
         cout<<S_CADENA_021<<endl; //ERROR: Registro inexistente
         return -1;
@@ -1003,7 +1003,7 @@ int CInterfazConsola::VolcarBloqueMemoria(CCadena dir,CCadena num)
         }
         return 0;
     }
-    catch(runtime_error)
+    catch(std::runtime_error)
     {
         cout<<S_CADENA_019<<parametro<<endl; //ERROR: Parametro incorrecto -
         return -1;
@@ -1064,7 +1064,7 @@ int CInterfazConsola::VolcarPila(CCadena num)
         }
         return 0;
     }
-    catch(runtime_error)
+    catch(std::runtime_error)
     {
         cout<<S_CADENA_019" num"<<endl; //ERROR: Parametro incorrecto -
         return -1;

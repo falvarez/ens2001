@@ -86,7 +86,7 @@ CEntero16b::CEntero16b(int num)
 {
     if((num<-((MAXINT+1)/2)) || (num>MAXINT))
     {
-        throw runtime_error("Entero Fuera De Rango");
+        throw std::runtime_error("Entero Fuera De Rango");
     }
     else
     {
@@ -156,7 +156,7 @@ CEntero16b::CEntero16b(const char *num)
                 case 'f' :
                 case 'F' : auxiliar=15;
                            break;
-                default :  throw runtime_error("Entero Fuera De Rango");
+                default :  throw std::runtime_error("Entero Fuera De Rango");
             }
             valor=valor*16+auxiliar;
         }
@@ -186,7 +186,7 @@ CEntero16b::CEntero16b(const char *num)
     }
     if((valor<MININT) || (valor>MAXINT))
     {
-        throw runtime_error("Entero Fuera De Rango");
+        throw std::runtime_error("Entero Fuera De Rango");
     }
     else
     {
@@ -491,7 +491,7 @@ CEntero16b CEntero16b::operator/ (const CEntero16b &ent2)
 
     if(ent2.valor==0)
     {
-        throw runtime_error("Division Por Cero");
+        throw std::runtime_error("Division Por Cero");
     }
 
     auxiliar=InternoAEntero(valor) / InternoAEntero(ent2.valor);
@@ -521,7 +521,7 @@ CEntero16b CEntero16b::operator% (const CEntero16b &ent2)
 
     if (ent2.valor==0)
     {
-        throw runtime_error("Division Por Cero");
+        throw std::runtime_error("Division Por Cero");
     }
 
     auxiliar=InternoAEntero(valor)%InternoAEntero(ent2.valor);

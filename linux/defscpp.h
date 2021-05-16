@@ -69,13 +69,6 @@ class TfrmConfiguracion;
 #include <ctype.h>
 #include <exception>
 
-class runtime_error
-{
-    public:
-        runtime_error(char *cad){};
-        runtime_error(void){};
-};
-
 #endif
 
 using namespace std;

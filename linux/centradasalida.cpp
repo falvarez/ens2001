@@ -90,7 +90,7 @@ int CEntradaSalida::Leer(CCadena &cadena)
     {
         conf->BancoRegistros()->
                            EscribirRegistroExcepcion(EX_DETENIDO_POR_USUARIO);
-        throw runtime_error("Tecla ESC pulsada durante entrada");
+        throw std::runtime_error("Tecla ESC pulsada durante entrada");
     }
     return EJ_SIGUIENTE;
 }
@@ -102,7 +102,7 @@ int CEntradaSalida::Leer(char &caracter)
     {
         conf->BancoRegistros()->
                            EscribirRegistroExcepcion(EX_DETENIDO_POR_USUARIO);
-        throw runtime_error("Tecla ESC pulsada durante entrada");
+        throw std::runtime_error("Tecla ESC pulsada durante entrada");
     }
     caracter=entrada.Cadena()[0];
     return EJ_SIGUIENTE;
@@ -116,7 +116,7 @@ int CEntradaSalida::Leer(CEntero16b &entero)
     {
         conf->BancoRegistros()->
                            EscribirRegistroExcepcion(EX_DETENIDO_POR_USUARIO);
-        throw runtime_error("Tecla ESC pulsada durante entrada");
+        throw std::runtime_error("Tecla ESC pulsada durante entrada");
     }
     else
     {
@@ -124,7 +124,7 @@ int CEntradaSalida::Leer(CEntero16b &entero)
         {
             entero=CEntero16b(entrada.Cadena());
         }
-        catch(runtime_error)
+        catch(std::runtime_error)
         {
             entero=CEntero16b(0);
         }
@@ -249,7 +249,7 @@ int CEntradaSalida::Leer(CCadena &cadena)
     {
         conf->BancoRegistros()->
                            EscribirRegistroExcepcion(EX_DETENIDO_POR_USUARIO);
-        throw runtime_error("Tecla ESC pulsada durante entrada");
+        throw std::runtime_error("Tecla ESC pulsada durante entrada");
     }
     return EJ_SIGUIENTE;
 }
@@ -261,7 +261,7 @@ int CEntradaSalida::Leer(char &caracter)
     {
         conf->BancoRegistros()->
                            EscribirRegistroExcepcion(EX_DETENIDO_POR_USUARIO);
-        throw runtime_error("Tecla ESC pulsada durante entrada");
+        throw std::runtime_error("Tecla ESC pulsada durante entrada");
     }
     caracter=entrada.Cadena()[0];
     return EJ_SIGUIENTE;
@@ -275,7 +275,7 @@ int CEntradaSalida::Leer(CEntero16b &entero)
     {
         conf->BancoRegistros()->
                            EscribirRegistroExcepcion(EX_DETENIDO_POR_USUARIO);
-        throw runtime_error("Tecla ESC pulsada durante entrada");
+        throw std::runtime_error("Tecla ESC pulsada durante entrada");
     }
     else
     {
@@ -283,7 +283,7 @@ int CEntradaSalida::Leer(CEntero16b &entero)
         {
             entero=CEntero16b(entrada.Cadena());
         }
-        catch(runtime_error)
+        catch(std::runtime_error)
         {
             entero=CEntero16b(0);
         }

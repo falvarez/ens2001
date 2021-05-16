@@ -61,7 +61,7 @@ void CBancoRegistros::Escribir(int registro,CEntero16b valor)
     {
         //El registro no existe
         EscribirRegistroExcepcion(EX_REGISTRO_NO_EXISTE);
-        throw runtime_error("Registro No Existe");
+        throw std::runtime_error("Registro No Existe");
     }
 
     if(registro==SP){
@@ -80,7 +80,7 @@ void CBancoRegistros::Escribir(int registro,CEntero16b valor)
                 registros[registro]=antiguo;
                 pila2=antiguo.Valor();
                 EscribirRegistroExcepcion(EX_SP_INVADE_CODIGO);
-                throw runtime_error("SP ha invadido el codigo");
+                throw std::runtime_error("SP ha invadido el codigo");
             }
         }
     }
@@ -98,7 +98,7 @@ void CBancoRegistros::Escribir(int registro,CEntero16b valor)
                 //Recuperamos el valor anterior
                 registros[registro]=antiguo;
                 EscribirRegistroExcepcion(EX_PC_INVADE_PILA);
-                throw runtime_error("PC ha invadido la pila");
+                throw std::runtime_error("PC ha invadido la pila");
             }
         }
     }
@@ -139,7 +139,7 @@ void CBancoRegistros::EscribirBiestableEstado(int biestable,int valor)
     {
         //El biestable no existe
         EscribirRegistroExcepcion(EX_BIESTABLE_NO_EXISTE);
-        throw runtime_error("Biestable No Existe");
+        throw std::runtime_error("Biestable No Existe");
     }
     return;
 }
@@ -196,7 +196,7 @@ void CBancoRegistros::Leer(int registro,CEntero16b &num)
     {
         //El registro no existe
         EscribirRegistroExcepcion(EX_REGISTRO_NO_EXISTE);
-        throw runtime_error("Registro No Existe");
+        throw std::runtime_error("Registro No Existe");
     }
     return;
 }
@@ -212,7 +212,7 @@ void CBancoRegistros::LeerBiestableEstado(int biestable,int &valor)
     {
         //El biestable no existe
         EscribirRegistroExcepcion(EX_BIESTABLE_NO_EXISTE);
-        throw runtime_error("Biestable No Existe");
+        throw std::runtime_error("Biestable No Existe");
     }
     return;
 }
@@ -287,7 +287,7 @@ void CBancoRegistros::LeerIdRegistro(CCadena &nombre,int &registro)
     {
         //El registro no existe
         EscribirRegistroExcepcion(EX_REGISTRO_NO_EXISTE);
-        throw runtime_error("Registro No Existe");
+        throw std::runtime_error("Registro No Existe");
     }
     return;
 }
@@ -302,7 +302,7 @@ void CBancoRegistros::LeerNombreRegistro(int registro,CCadena &nombre)
     {
         //El registro no existe
         EscribirRegistroExcepcion(EX_REGISTRO_NO_EXISTE);
-        throw runtime_error("Registro No Existe");
+        throw std::runtime_error("Registro No Existe");
     }
     return;
 }

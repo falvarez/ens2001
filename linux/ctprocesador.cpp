@@ -80,7 +80,7 @@ int CTProcesador::Leer(CEntero16b &entero)
         vprincipal->LeerEntrada(entrada);
         entero=CEntero16b(entrada.c_str());
     }
-    catch(runtime_error)
+    catch(std::runtime_error)
     {
         entero=CEntero16b(0);
     }
@@ -91,7 +91,7 @@ int CTProcesador::Leer(char &caracter)
     String entrada;
     String salida;
 
-    vprincipal->EscribirTipoEntrada("Carácter");
+    vprincipal->EscribirTipoEntrada("Carï¿½cter");
     Synchronize(vprincipal->LeerConsola);
     vprincipal->LeerSalida(salida);
     if(salida.Length()>0)

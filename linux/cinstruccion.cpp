@@ -45,7 +45,7 @@ int CInstruccion::PushPila(CEntero16b operando)
                                 break;
         default : conf->BancoRegistros()->
                           EscribirRegistroExcepcion(EX_MODOPILA_INCORRECTO);
-                  throw runtime_error("Modo Pila No Soportado");
+                  throw std::runtime_error("Modo Pila No Soportado");
     }
     conf->BancoRegistros()->Escribir(SP,direccion);
     return EJ_SIGUIENTE;
@@ -64,7 +64,7 @@ int CInstruccion::PopPila(CEntero16b &operando)
                                 break;
         default : conf->BancoRegistros()->
                           EscribirRegistroExcepcion(EX_MODOPILA_INCORRECTO);
-                  throw runtime_error("Modo Pila No Soportado");
+                  throw std::runtime_error("Modo Pila No Soportado");
     }
     conf->BancoRegistros()->Escribir(SP,direccion);
     conf->BancoRegistros()->Leer(SP,direccion);
@@ -101,7 +101,7 @@ int CInstruccion::Entrada2Operandos(void)
             break;
         default :
             conf->BancoRegistros()->EscribirRegistroExcepcion(EX_MDIRERRONEO);
-            throw runtime_error("Modo De Direccionamiento Erroneo");
+            throw std::runtime_error("Modo De Direccionamiento Erroneo");
     }
 
     //Recuperamos el operando 2 en origen2
@@ -130,7 +130,7 @@ int CInstruccion::Entrada2Operandos(void)
             break;
         default :
             conf->BancoRegistros()->EscribirRegistroExcepcion(EX_MDIRERRONEO);
-            throw runtime_error("Modo De Direccionamiento Erroneo");
+            throw std::runtime_error("Modo De Direccionamiento Erroneo");
     }
     return EJ_SIGUIENTE;
 }
@@ -175,7 +175,7 @@ int CInstruccion::Aritmetica(int operacion,CEntero16b &resultado,
                 //EXCEPCION DIVISION POR CERO
                 conf->BancoRegistros()->
                           EscribirRegistroExcepcion(EX_DIVISION_POR_CERO);
-                throw runtime_error("Division Por Cero");
+                throw std::runtime_error("Division Por Cero");
             }
             resultado = op1 / op2;
             break;
@@ -185,7 +185,7 @@ int CInstruccion::Aritmetica(int operacion,CEntero16b &resultado,
                 //EXCEPCION DIVISION POR CERO
                 conf->BancoRegistros()->
                            EscribirRegistroExcepcion(EX_DIVISION_POR_CERO);
-                throw runtime_error("Division Por Cero");
+                throw std::runtime_error("Division Por Cero");
             }
             resultado = op1 % op2;
             break;
@@ -200,7 +200,7 @@ int CInstruccion::Aritmetica(int operacion,CEntero16b &resultado,
             break;
         default :
             //OPERACION INCORRECTA
-            throw runtime_error("Operacion Aritmetica Incorrecta");
+            throw std::runtime_error("Operacion Aritmetica Incorrecta");
     }
     //Actualizamos los biestables de estado
     conf->BancoRegistros()->EscribirBiestableEstado(BS_Z,resultado.Z());
@@ -225,7 +225,7 @@ int CInstruccion::Logica(int operacion,CEntero16b &resultado,
         case ALU_XOR : resultado = op1 ^ op2;
                        break;
         default :      //OPERACION INCORRECTA
-                       throw runtime_error("Operacion Logica Incorrecta");
+                       throw std::runtime_error("Operacion Logica Incorrecta");
     }
     //Las operaciones logicas no modifican el valor de los biestables de estado
     return EJ_SIGUIENTE;
@@ -306,7 +306,7 @@ int I_move::Entrada(void)
             break;
         default :
             conf->BancoRegistros()->EscribirRegistroExcepcion(EX_MDIRERRONEO);
-            throw runtime_error("Modo De Direccionamiento Erroneo");
+            throw std::runtime_error("Modo De Direccionamiento Erroneo");
     }
     return EJ_SIGUIENTE;
 }
@@ -336,7 +336,7 @@ int I_move::Salida(void)
             break;
         default :
             conf->BancoRegistros()->EscribirRegistroExcepcion(EX_MDIRERRONEO);
-            throw runtime_error("Modo De Direccionamiento Erroneo");
+            throw std::runtime_error("Modo De Direccionamiento Erroneo");
     }
     return EJ_SIGUIENTE;
 }
@@ -377,7 +377,7 @@ int I_push::Entrada(void)
             break;
         default :
             conf->BancoRegistros()->EscribirRegistroExcepcion(EX_MDIRERRONEO);
-            throw runtime_error("Modo De Direccionamiento Erroneo");
+            throw std::runtime_error("Modo De Direccionamiento Erroneo");
     }
     return EJ_SIGUIENTE;
 }
@@ -612,7 +612,7 @@ int I_inc::Entrada(void)
             break;
         default :
             conf->BancoRegistros()->EscribirRegistroExcepcion(EX_MDIRERRONEO);
-            throw runtime_error("Modo De Direccionamiento Erroneo");
+            throw std::runtime_error("Modo De Direccionamiento Erroneo");
     }
     return EJ_SIGUIENTE;
 }
@@ -691,7 +691,7 @@ int I_dec::Entrada(void)
             break;
         default :
             conf->BancoRegistros()->EscribirRegistroExcepcion(EX_MDIRERRONEO);
-            throw runtime_error("Modo De Direccionamiento Erroneo");
+            throw std::runtime_error("Modo De Direccionamiento Erroneo");
     }
     return EJ_SIGUIENTE;
 }
@@ -770,7 +770,7 @@ int I_neg::Entrada(void)
             break;
         default :
             conf->BancoRegistros()->EscribirRegistroExcepcion(EX_MDIRERRONEO);
-            throw runtime_error("Modo De Direccionamiento Erroneo");
+            throw std::runtime_error("Modo De Direccionamiento Erroneo");
     }
     return EJ_SIGUIENTE;
 }
@@ -959,7 +959,7 @@ int I_not::Entrada(void)
             break;
         default :
             conf->BancoRegistros()->EscribirRegistroExcepcion(EX_MDIRERRONEO);
-            throw runtime_error("Modo De Direccionamiento Erroneo");
+            throw std::runtime_error("Modo De Direccionamiento Erroneo");
     }
     return EJ_SIGUIENTE;
 }
@@ -1389,7 +1389,7 @@ int I_inchar::Entrada(void)
             break;
         default :
             conf->BancoRegistros()->EscribirRegistroExcepcion(EX_MDIRERRONEO);
-            throw runtime_error("Modo De Direccionamiento Erroneo");
+            throw std::runtime_error("Modo De Direccionamiento Erroneo");
     }
     return EJ_SIGUIENTE;
 }
@@ -1432,7 +1432,7 @@ int I_inint::Entrada(void)
             break;
         default :
             conf->BancoRegistros()->EscribirRegistroExcepcion(EX_MDIRERRONEO);
-            throw runtime_error("Modo De Direccionamiento Erroneo");
+            throw std::runtime_error("Modo De Direccionamiento Erroneo");
     }
     return EJ_SIGUIENTE;
 }
@@ -1482,13 +1482,13 @@ int I_instr::Entrada(void)
             default :
                 conf->BancoRegistros()->
                     EscribirRegistroExcepcion(EX_MDIRERRONEO);
-                throw runtime_error("Modo De Direccionamiento Erroneo");
+                throw std::runtime_error("Modo De Direccionamiento Erroneo");
         }
         if(direccion.C()==1)
         {
         	conf->BancoRegistros()->
         	    EscribirRegistroExcepcion(EX_FINALMEMORIA);
-        	throw runtime_error("Se sobrepaso el limite de memoria");
+        	throw std::runtime_error("Se sobrepaso el limite de memoria");
         }
         else
         {
@@ -1515,12 +1515,12 @@ int I_instr::Entrada(void)
             break;
         default :
             conf->BancoRegistros()->EscribirRegistroExcepcion(EX_MDIRERRONEO);
-            throw runtime_error("Modo De Direccionamiento Erroneo");
+            throw std::runtime_error("Modo De Direccionamiento Erroneo");
     }
     if(direccion.C()==1)
     {
         conf->BancoRegistros()->EscribirRegistroExcepcion(EX_FINALMEMORIA);
-        throw runtime_error("Se sobrepaso el limite de memoria");
+        throw std::runtime_error("Se sobrepaso el limite de memoria");
     }
     else
     {
@@ -1566,7 +1566,7 @@ int I_wrchar::Salida(void)
             break;
         default :
             conf->BancoRegistros()->EscribirRegistroExcepcion(EX_MDIRERRONEO);
-            throw runtime_error("Modo De Direccionamiento Erroneo");
+            throw std::runtime_error("Modo De Direccionamiento Erroneo");
     }
     caracter=(char)resultado.Valor();
     conf->EntradaSalida()->Escribir(caracter);
@@ -1610,7 +1610,7 @@ int I_wrint::Salida(void)
             break;
         default :
             conf->BancoRegistros()->EscribirRegistroExcepcion(EX_MDIRERRONEO);
-            throw runtime_error("Modo De Direccionamiento Erroneo");
+            throw std::runtime_error("Modo De Direccionamiento Erroneo");
     }
     conf->EntradaSalida()->Escribir(resultado);
     return EJ_SIGUIENTE;
@@ -1654,13 +1654,13 @@ int I_wrstr::Salida(void)
             default :
                 conf->BancoRegistros()->
                     EscribirRegistroExcepcion(EX_MDIRERRONEO);
-                throw runtime_error("Modo De Direccionamiento Erroneo");
+                throw std::runtime_error("Modo De Direccionamiento Erroneo");
         }
         if(direccion.C()==1)
         {
         	conf->BancoRegistros()->
         	    EscribirRegistroExcepcion(EX_FINALMEMORIA);
-        	throw runtime_error("Se sobrepaso el limite de memoria");
+        	throw std::runtime_error("Se sobrepaso el limite de memoria");
         }
         else
         {
