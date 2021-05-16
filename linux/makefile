@@ -1,22 +1,12 @@
 # makefile para ens2001, version 1.0
 
 #LINUX
-#CC++ = c++
-#MOVER = mv
-#BORRAR = rm
-#ENS2001 = ens2001
-#O = o
+CC++ = c++ -std=c++98
+MOVER = mv
+BORRAR = rm
+ENS2001 = ens2001
+O = o
 
-#MSDOS-WINDOWS
-CC = bcc32 -Id:\pfc\fuentes -Id:\pfc\fuentes\windows -nd:\pfc
-#CC = gcc 
-CC++ = bcc32 -Id:\pfc\fuentes -Id:\pfc\fuentes\windows -nd:\pfc
-#CC++ = gpp
-MOVER = move
-BORRAR = del
-ENS2001 = ens2001.exe
-#O = o
-O = obj
 
 OBJECTS = cconfiguracion.$(O) cmemoria.$(O) cbancoregistros.$(O) \
           cprocesador.$(O) cinstruccion.$(O) cgestorinstrucciones.$(O) \
