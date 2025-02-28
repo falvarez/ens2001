@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "ostream": "cpp",
+        "gestionerrores.h": "c",
+        "funcionesauxiliares.h": "c"
+    }
+}
