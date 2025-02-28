@@ -1186,7 +1186,7 @@ int CInterfazConsola::LeerComandos(void)
             
                 if(nparametros==1)
                 {
-                    respuesta==VolcarPila(parametro1);
+                    respuesta=VolcarPila(parametro1); // Antes ponía ==, huele a bug que tira para atrás
                 }
                 else
                 {

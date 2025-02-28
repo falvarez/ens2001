@@ -9,7 +9,7 @@
 #include <stdlib.h>
 
 /*Tipos de datos*/
-typedef struct Instruccion{
+typedef struct Instruccion {
         int codop;
         int mdir1;
         int op1;
@@ -18,25 +18,29 @@ typedef struct Instruccion{
         int mdir2;
         int op2;
         char *etiqueta2;
-        int longitud2;};
+        int longitud2;
+} Instruccion_t;
 
-typedef struct EntradaTablaEtiquetas{
+typedef struct EntradaTablaEtiquetas {
         char *etiqueta;
-        int valor;};
+        int valor;
+} EntradaTablaEtiquetas_t;
 
-typedef struct EntradaTablaConfiguracion{
+typedef struct EntradaTablaConfiguracion {
         char *etiqueta;
         int posicion;
         int desplazamiento;
         int mododireccionamiento;
-        int linea;};
+        int linea;
+} EntradaTablaConfiguracion_t;
         
-typedef struct Error{
+typedef struct Error {
         int codigo;
         char *descripcion;
         int linea;
         char *token;
-        struct Error *siguiente;};
+        struct Error *siguiente;
+} Error_t;
 
 /*Bloques de Memoria*/
 

@@ -16,7 +16,7 @@
 #include "censamblador.h"
 #include "cinterfazdisco.h"
 
-extern "C" int ListarErrores(char *nombrefichero);
+extern "C" int ListarErrores(const char *nombrefichero);
 
 class CInterfazConsola
 {
