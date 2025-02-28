@@ -1094,7 +1094,7 @@ int CInterfazConsola::LeerComandos(void)
     while(respuesta!=1)
     {
         //Prompt
-        cout<<"ENS2001>";
+        cout<<"ENS2001> ";
         //Leemos la entrada
         cin.get(entrada,50);
         cin.ignore();
