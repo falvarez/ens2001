@@ -1,3 +1,4 @@
 *.obj
 *.o
+out/
 ens2001

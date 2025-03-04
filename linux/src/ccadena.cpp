@@ -9,7 +9,7 @@ CCadena::CCadena(void)
     return;
 }
 //---------------------------------------------------------------------------
-CCadena::CCadena(char *cadena)
+CCadena::CCadena(const char *cadena)
 {
     longitud=strlen(cadena);
     texto=new char[longitud+1];
@@ -143,6 +143,11 @@ int CCadena::Comparar(CCadena cad2)
 }
 //---------------------------------------------------------------------------
 int CCadena::Comparar(char *cad2)
+{
+    return(strcmp(texto,cad2));
+}
+//---------------------------------------------------------------------------
+int CCadena::Comparar(const char *cad2)
 {
     return(strcmp(texto,cad2));
 }

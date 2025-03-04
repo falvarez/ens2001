@@ -197,7 +197,7 @@ void LiberarListaErrores(void)
     }
 }
 /*-------------------------------------------------------------------------*/
-int ListarErrores(char *nombrefichero)
+int ListarErrores(const char *nombrefichero)
 {
     FILE *fd;
     char *caracter;
@@ -221,7 +221,7 @@ int ListarErrores(char *nombrefichero)
     }
 }
 /*-------------------------------------------------------------------------*/
-int VolcarFicheroErrores(char *nombrefichero)
+int VolcarFicheroErrores(const char *nombrefichero)
 {
     FILE *fd; /*Descriptor del fichero de errores*/
     struct Error *puntero; /*Puntero para recorrer la lista de errores*/

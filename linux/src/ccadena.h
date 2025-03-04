@@ -24,7 +24,7 @@ class CCadena
         //Constructor por defecto
         CCadena(void);
         //Constructor con inicializacion
-        CCadena(char *cadena);
+        CCadena(const char *cadena);
         //Constructor Copia
         CCadena(const CCadena &cadena);
         //Destructor
@@ -45,6 +45,7 @@ class CCadena
         //Comparaciones
         int Comparar(CCadena cad2);
         int Comparar(char *cad2);
+        int Comparar(const char *cad2);
 };
 
 #endif //_CCADENA_H_

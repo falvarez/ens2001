@@ -12,7 +12,7 @@
 #define _CADENAS_H_ "cadenas_ansi.h"
 #define TITULO "ENS2001 para Linux"
 #define VERSION "1.0"
-#define FECHA "Febrero 2003 (recompilado en Mayo 2021)"
+#define FECHA "Febrero 2003 (recompilado en marzo de 2025)"
 #define URL "https://ens2001.falvarez.es/"
 #define _IDIOMA_ESPANOL_
 
